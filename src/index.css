@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Typography */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-900 overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  h1, h2, h3, .font-display {
+    @apply font-serif; /* Playfair Display */
+  }
+}
+
+@layer components {
+  /* Luxury Gold Gradient for Buttons/Highlights */
+  .btn-luxury {
+    @apply bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white px-8 py-3 
+           rounded-sm tracking-widest uppercase text-xs font-semibold 
+           transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  /* Section Title Styling */
+  .section-title {
+    @apply text-3xl md:text-5xl font-bold text-center mb-4 text-slate-800;
+  }
+  
+  .section-subtitle {
+    @apply text-center text-slate-500 max-w-2xl mx-auto mb-12 uppercase tracking-[0.2em] text-sm;
+  }
+}
+
+/* Smooth Fade-in Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-luxury-in {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar for Luxury Feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#B8860B] rounded-full;
+}
