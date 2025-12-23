@@ -21,10 +21,9 @@ export default function LeadPopup({ trigger = false, onClose }) {
   const [error, setError] = useState('');
   const [showCloseButton, setShowCloseButton] = useState(false);
 
-  // Expanded Form Data to include all 10 points
   const [formData, setFormData] = useState({
-    name: '', phone: '', location: '', intent: '', 
-    configuration: '', budget: '', timeline: '', 
+    name: '', phone: '', location: '', intent: '',
+    configuration: '', budget: '', timeline: '',
     siteVisit: '', contactMethod: '', consent: false
   });
 
@@ -41,7 +40,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
   useEffect(() => {
     if (trigger && !submitted) {
-      const timer = setTimeout(() => setShowCloseButton(true), 10000); 
+      const timer = setTimeout(() => setShowCloseButton(true), 10000);
       return () => clearTimeout(timer);
     }
   }, [trigger, submitted]);
@@ -51,14 +50,46 @@ export default function LeadPopup({ trigger = false, onClose }) {
     if (error) setError('');
   };
 
+  // New: Name validation - no numbers allowed
+  const handleNameChange = (value) => {
+    // Allow only letters, spaces, hyphens, apostrophes
+    const nameRegex = /^[A-Za-z\s'-]*$/;
+    if (!nameRegex.test(value)) {
+      setError('Name cannot contain numbers.');
+    } else {
+      setError('');
+    }
+    setFormData(prev => ({ ...prev, name: value }));
+  };
+
   const handleNext = () => {
     if (step === 1) {
       if (!formData.name.trim()) return setError('Please enter your full name.');
+      
+      // Check for numbers in name
+      if (/\d/.test(formData.name)) {
+        return setError('Name cannot contain numbers.');
+      }
+
       if (!validateIndianMobile(formData.phone)) return setError('Valid mobile number is mandatory.');
     }
     if (step === 2) {
       if (!formData.location) return setError('Please select your current location.');
       if (!formData.intent) return setError('Please select your purchase intent.');
+    }
+    if (step === 3) {
+      if (!formData.configuration || formData.configuration === 'Select Configuration...')
+        return setError('Please select your preferred configuration.');
+      if (!formData.budget || formData.budget === 'Select Budget...')
+        return setError('Please select your approximate budget range.');
+    }
+    if (step === 4) {
+      if (!formData.timeline || formData.timeline === 'Planning to purchase?')
+        return setError('Please select your purchase timeline.');
+      if (!formData.siteVisit || formData.siteVisit === 'Schedule a site visit?')
+        return setError('Please select if you want a site visit.');
+      if (!formData.contactMethod || formData.contactMethod === 'Preferred contact method?')
+        return setError('Please select your preferred contact method.');
     }
     setError('');
     setStep(prev => prev + 1);
@@ -66,12 +97,18 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.timeline || formData.timeline === 'Planning to purchase?')
+      return setError('Please select your purchase timeline.');
+    if (!formData.siteVisit || formData.siteVisit === 'Schedule a site visit?')
+      return setError('Please select if you want a site visit.');
+    if (!formData.contactMethod || formData.contactMethod === 'Preferred contact method?')
+      return setError('Please select your preferred contact method.');
     if (!formData.consent) return setError('Please provide consent to proceed.');
-    
+   
     setLoading(true);
     const validPhone = validateIndianMobile(formData.phone);
 
-    // EXACT MAPPING FOR EXCEL/GOOGLE SHEETS
     const payload = {
       Timestamp: new Date().toLocaleString('en-IN'),
       Name: formData.name.trim(),
@@ -98,11 +135,11 @@ export default function LeadPopup({ trigger = false, onClose }) {
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-        priority: 'high' 
+        priority: 'high'
       });
       setSubmitted(true);
     } catch (err) {
-      setSubmitted(true); 
+      setSubmitted(true);
     } finally {
       setLoading(false);
     }
@@ -114,7 +151,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
     <div className="fixed inset-0 bg-slate-900/90 z-[100] flex items-center justify-center p-4 backdrop-blur-md">
       <motion.div layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden relative">
         
-        {/* Progress Bar */}
         <div className="flex h-1.5 w-full bg-slate-100">
           <motion.div className="h-full bg-emerald-500" animate={{ width: `${(step / 4) * 100}%` }} />
         </div>
@@ -135,19 +171,30 @@ export default function LeadPopup({ trigger = false, onClose }) {
               <motion.div key={step} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}>
                 {error && <div className="mb-4 p-2 bg-red-50 text-red-600 text-[11px] rounded-lg border border-red-100 text-center font-bold">{error}</div>}
                 
-                {/* STEP 1: Identification */}
                 {step === 1 && (
                   <div className="space-y-4">
                     <p className="text-center font-bold text-slate-700">Let's get started</p>
-                    <input type="text" placeholder="Your Full Name *" className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} />
-                    <input type="tel" placeholder="10-Digit Mobile Number *" className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" value={formData.phone} onChange={(e) => handleInputChange('phone', e.target.value)} />
+                    <input 
+                      type="text" 
+                      placeholder="Your Full Name *" 
+                      className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" 
+                      value={formData.name} 
+                      onChange={(e) => handleNameChange(e.target.value)} 
+                    />
+                    <input 
+                      type="tel" 
+                      placeholder="10-Digit Mobile Number *" 
+                      className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" 
+                      value={formData.phone} 
+                      onChange={(e) => handleInputChange('phone', e.target.value)} 
+                    />
                     <button onClick={handleNext} className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100">
                       View Exclusive Details <ChevronRight className="w-5 h-5" />
                     </button>
                   </div>
                 )}
 
-                {/* STEP 2: Location & Intent */}
+                {/* Rest of the steps remain exactly the same */}
                 {step === 2 && (
                   <div className="space-y-5">
                     <div>
@@ -159,9 +206,9 @@ export default function LeadPopup({ trigger = false, onClose }) {
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-slate-600 mb-3">Looking for a property to?</p>
+                      <p className="text-sm font-bold text-slate-600 mb-3">What is your purpose to buy this property?</p>
                       <div className="grid grid-cols-2 gap-3">
-                        {['Buy', 'Rent'].map(int => (
+                        {['Self Use(Own Living)', 'Investment(Future Return)'].map(int => (
                           <button key={int} onClick={() => handleInputChange('intent', int)} className={`p-3 text-xs border-2 rounded-xl font-semibold transition-all ${formData.intent === int ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-slate-100 text-slate-500'}`}>{int}</button>
                         ))}
                       </div>
@@ -173,7 +220,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   </div>
                 )}
 
-                {/* STEP 3: Product Fit & Affordability */}
                 {step === 3 && (
                   <div className="space-y-5">
                     <div>
@@ -181,17 +227,14 @@ export default function LeadPopup({ trigger = false, onClose }) {
                       <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm" onChange={(e) => handleInputChange('configuration', e.target.value)}>
                         <option>Select Configuration...</option>
                         <option>3 BHK + Study</option>
-                        <option>4 BHK + Servant</option>
-                        <option>Open to both</option>
                       </select>
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-600 mb-3">Approximate Budget Range?</p>
                       <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm" onChange={(e) => handleInputChange('budget', e.target.value)}>
                         <option>Select Budget...</option>
-                        <option>₹3.5 Cr – ₹4.0 Cr</option>
-                        <option>₹4.0 Cr – ₹5.0 Cr</option>
-                        <option>Above ₹5.0 Cr</option>
+                        <option>₹2.5 Cr – ₹3 Cr</option>
+                        <option>₹3 Cr – ₹3.75 Cr</option>
                         <option>Would like to discuss</option>
                       </select>
                     </div>
@@ -202,7 +245,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   </div>
                 )}
 
-                {/* STEP 4: Timeline & Site Visit */}
                 {step === 4 && (
                   <div className="space-y-4">
                     <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm" onChange={(e) => handleInputChange('timeline', e.target.value)}>
@@ -215,14 +257,12 @@ export default function LeadPopup({ trigger = false, onClose }) {
                     <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm" onChange={(e) => handleInputChange('siteVisit', e.target.value)}>
                       <option>Schedule a site visit?</option>
                       <option>Yes, site visit</option>
-                      <option>Yes, virtual tour</option>
                       <option>Not at the moment</option>
                     </select>
                     <select className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm" onChange={(e) => handleInputChange('contactMethod', e.target.value)}>
                       <option>Preferred contact method?</option>
                       <option>Call</option>
                       <option>WhatsApp</option>
-                      <option>Email</option>
                     </select>
 
                     <label className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl">
