@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import { motion, AnimatePresence } from 'framer-motion';
 import X from 'lucide-react/dist/esm/icons/x';
 import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
@@ -6,7 +7,13 @@ import Download from 'lucide-react/dist/esm/icons/download';
 import ShieldCheck from 'lucide-react/dist/esm/icons/shield-check';
 import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right';
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOGtcOhtDcGdhj3y9dyafjfLX8OGgdGSgetTtS_FHeWEcRsYyo7E7lOc2DGR_0RK2lLw/exec';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('Supabase URL or Anon Key missing! Check your .env file and restart the dev server.');
+}
 
 const validateIndianMobile = (input) => {
   const cleaned = input.replace(/[\s\-()+]/g, '');
@@ -17,6 +24,7 @@ const validateIndianMobile = (input) => {
 export default function LeadPopup({ trigger = false, onClose }) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [checkLoading, setCheckLoading] = useState(false); // For phone check
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [showCloseButton, setShowCloseButton] = useState(false);
@@ -50,9 +58,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
     if (error) setError('');
   };
 
-  // New: Name validation - no numbers allowed
   const handleNameChange = (value) => {
-    // Allow only letters, spaces, hyphens, apostrophes
     const nameRegex = /^[A-Za-z\s'-]*$/;
     if (!nameRegex.test(value)) {
       setError('Name cannot contain numbers.');
@@ -62,17 +68,41 @@ export default function LeadPopup({ trigger = false, onClose }) {
     setFormData(prev => ({ ...prev, name: value }));
   };
 
-  const handleNext = () => {
+  // NEW: Check if phone already exists in DB
+  const checkPhoneExists = async (phone) => {
+    const { data, error } = await supabase
+      .from('leads')
+      .select('phone')
+      .eq('phone', phone)
+      .maybeSingle(); // Returns null if no row
+
+    if (error && error.code !== 'PGRST116') { // PGRST116 = no rows (not an error)
+      console.error('Error checking phone:', error);
+      return false;
+    }
+    return !!data; // true if phone exists
+  };
+
+  const handleNext = async () => {
+    setError('');
+
     if (step === 1) {
       if (!formData.name.trim()) return setError('Please enter your full name.');
-      
-      // Check for numbers in name
-      if (/\d/.test(formData.name)) {
-        return setError('Name cannot contain numbers.');
-      }
+      if (/\d/.test(formData.name)) return setError('Name cannot contain numbers.');
 
-      if (!validateIndianMobile(formData.phone)) return setError('Valid mobile number is mandatory.');
+      const validPhone = validateIndianMobile(formData.phone);
+      if (!validPhone) return setError('Valid mobile number is mandatory.');
+
+      // Check for duplicate phone in DB
+      setCheckLoading(true);
+      const exists = await checkPhoneExists(validPhone);
+      setCheckLoading(false);
+
+      if (exists) {
+        return setError('This phone number is already registered. Please use a different number.');
+      }
     }
+
     if (step === 2) {
       if (!formData.location) return setError('Please select your current location.');
       if (!formData.intent) return setError('Please select your purchase intent.');
@@ -91,6 +121,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
       if (!formData.contactMethod || formData.contactMethod === 'Preferred contact method?')
         return setError('Please select your preferred contact method.');
     }
+
     setError('');
     setStep(prev => prev + 1);
   };
@@ -105,41 +136,37 @@ export default function LeadPopup({ trigger = false, onClose }) {
     if (!formData.contactMethod || formData.contactMethod === 'Preferred contact method?')
       return setError('Please select your preferred contact method.');
     if (!formData.consent) return setError('Please provide consent to proceed.');
-   
+
     setLoading(true);
     const validPhone = validateIndianMobile(formData.phone);
 
     const payload = {
-      Timestamp: new Date().toLocaleString('en-IN'),
-      Name: formData.name.trim(),
-      Phone: validPhone,
-      Location: formData.location,
-      Intent: formData.intent,
-      Configuration: formData.configuration,
-      Budget: formData.budget,
-      Timeline: formData.timeline,
-      SiteVisit: formData.siteVisit,
-      ContactMethod: formData.contactMethod,
-      UTM_Source: utms.source,
-      UTM_Medium: utms.medium,
-      UTM_Campaign: utms.campaign,
-      UTM_Term: utms.term,
-      UTM_Content: utms.content
+      name: formData.name.trim(),
+      phone: validPhone,
+      location: formData.location,
+      intent: formData.intent,
+      configuration: formData.configuration,
+      budget: formData.budget,
+      timeline: formData.timeline,
+      site_visit: formData.siteVisit,
+      utm_source: utms.source,
+      utm_medium: utms.medium,
+      utm_campaign: utms.campaign,
+      utm_term: utms.term,
+      utm_content: utms.content
     };
 
-    localStorage.setItem(`lead_${Date.now()}`, JSON.stringify(payload));
-
     try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        priority: 'high'
-      });
+      const { error: insertError } = await supabase.from('leads').insert(payload);
+      if (insertError) {
+        setError('Error submitting lead. Please try again.');
+        console.error(insertError);
+        return;
+      }
       setSubmitted(true);
     } catch (err) {
-      setSubmitted(true);
+      setError('Error submitting lead. Please try again.');
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -188,13 +215,17 @@ export default function LeadPopup({ trigger = false, onClose }) {
                       value={formData.phone} 
                       onChange={(e) => handleInputChange('phone', e.target.value)} 
                     />
-                    <button onClick={handleNext} className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100">
-                      View Exclusive Details <ChevronRight className="w-5 h-5" />
+                    <button 
+                      onClick={handleNext} 
+                      disabled={checkLoading}
+                      className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100 disabled:opacity-70"
+                    >
+                      {checkLoading ? 'Checking...' : <>View Exclusive Details <ChevronRight className="w-5 h-5" /></>}
                     </button>
                   </div>
                 )}
 
-                {/* Rest of the steps remain exactly the same */}
+                {/* Steps 2, 3, 4 remain exactly the same */}
                 {step === 2 && (
                   <div className="space-y-5">
                     <div>
