@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 // Tree-shaken imports for performance
-import Menu from 'lucide-react/dist/esm/icons/menu';
-import X from 'lucide-react/dist/esm/icons/x';
-import Phone from 'lucide-react/dist/esm/icons/phone';
-import Building2 from 'lucide-react/dist/esm/icons/building-2';
+import Menu from "lucide-react/dist/esm/icons/menu";
+import X from "lucide-react/dist/esm/icons/x";
+import Phone from "lucide-react/dist/esm/icons/phone";
+import Building2 from "lucide-react/dist/esm/icons/building-2";
+
+import { trackEvent } from "../utils/analytics";
 
 export default function Navbar({ openPopup }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +31,7 @@ export default function Navbar({ openPopup }) {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
     setIsOpen(false);
@@ -64,14 +66,18 @@ export default function Navbar({ openPopup }) {
               <Building2 className="w-5 h-5 md:w-6 md:h-6 text-emerald-400" />
             </div>
             <div className="flex flex-col">
-              <span className={`font-serif font-bold text-xl md:text-2xl tracking-tight leading-none transition-colors duration-300 ${
-                isScrolled ? "text-slate-900" : "text-white"
-              }`}>
+              <span
+                className={`font-serif font-bold text-xl md:text-2xl tracking-tight leading-none transition-colors duration-300 ${
+                  isScrolled ? "text-slate-900" : "text-white"
+                }`}
+              >
                 Suncity Monarch
               </span>
-              <span className={`text-[8px] uppercase tracking-[0.3em] font-bold mt-1 transition-colors duration-300 ${
-                isScrolled ? "text-emerald-600" : "text-emerald-400"
-              }`}>
+              <span
+                className={`text-[8px] uppercase tracking-[0.3em] font-bold mt-1 transition-colors duration-300 ${
+                  isScrolled ? "text-emerald-600" : "text-emerald-400"
+                }`}
+              >
                 Sector 78, Gurugram
               </span>
             </div>
@@ -91,9 +97,16 @@ export default function Navbar({ openPopup }) {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
-            
+
             <button
-              onClick={openPopup}
+              onClick={() => {
+                trackEvent({
+                  action: "cta_click",
+                  category: "engagement",
+                  label: "enquire-form",
+                });
+                openPopup();
+              }}
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all hover:shadow-xl hover:shadow-emerald-500/20 active:scale-95"
             >
               <Phone className="w-4 h-4" />
@@ -104,7 +117,9 @@ export default function Navbar({ openPopup }) {
           {/* Mobile Toggle */}
           <button
             className={`lg:hidden p-2 rounded-lg transition-colors ${
-              isScrolled ? "text-slate-900 hover:bg-slate-100" : "text-white hover:bg-white/10"
+              isScrolled
+                ? "text-slate-900 hover:bg-slate-100"
+                : "text-white hover:bg-white/10"
             }`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
@@ -123,7 +138,7 @@ export default function Navbar({ openPopup }) {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-slate-900/95 z-[70] lg:hidden flex flex-col justify-center items-center backdrop-blur-sm"
           >
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="absolute top-8 right-8 text-white p-2 hover:bg-white/10 rounded-full"
             >
@@ -143,7 +158,7 @@ export default function Navbar({ openPopup }) {
                   {item.name}
                 </motion.button>
               ))}
-              
+
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -157,7 +172,7 @@ export default function Navbar({ openPopup }) {
                 Contact Expert
               </motion.button>
             </div>
-            
+
             <div className="absolute bottom-12 flex flex-col items-center text-white/40 italic text-sm">
               <Building2 className="w-6 h-6 mb-2 opacity-20" />
               <p>Redefining Ultra-Luxury Living</p>
