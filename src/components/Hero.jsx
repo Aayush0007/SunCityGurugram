@@ -5,21 +5,20 @@ import Trees from "lucide-react/dist/esm/icons/trees";
 import Home from "lucide-react/dist/esm/icons/home";
 import Trophy from "lucide-react/dist/esm/icons/trophy";
 import Sparkles from "lucide-react/dist/esm/icons/sparkles";
-import Phone from "lucide-react/dist/esm/icons/phone";
 import Download from "lucide-react/dist/esm/icons/download";
 import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+
+// Import local video
+import heroVideo from "../Assets/VD2.mp4";
 
 import { trackEvent } from "../utils/analytics";
 
 export default function Hero({ openPopup }) {
   const [quickPhone, setQuickPhone] = useState("");
 
-  
   const handleQuickLead = (e) => {
     e.preventDefault();
     if (quickPhone.length >= 10) {
-      // Pass the phone to the global state or open popup
-      // To keep it simple: we open the main qualified form
       openPopup();
     }
   };
@@ -44,12 +43,15 @@ export default function Hero({ openPopup }) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Background Image with Optimized Overlay */}
+      {/* Background Video with Optimized Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://royalresidencies.com/wp-content/uploads/2025/07/aipl-lake-city-gurgaon.jpeg"
-          alt="Suncity Monarch Aerial View"
-          className="w-full h-full object-cover object-center opacity-60 bg-fixed"
+        <video
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-900" />
       </div>
