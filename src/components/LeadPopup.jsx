@@ -25,13 +25,10 @@ const validateIndianMobile = (input) => {
   return /^[6-9]\d{9}$/.test(tenDigit) ? tenDigit : null;
 };
 
-
-
-
 export default function LeadPopup({ trigger = false, onClose }) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [checkLoading, setCheckLoading] = useState(false); // For phone check
+  const [checkLoading, setCheckLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [showCloseButton, setShowCloseButton] = useState(false);
@@ -41,11 +38,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
     phone: "",
     location: "",
     intent: "",
-    configuration: "",
-    budget: "",
     timeline: "",
-    siteVisit: "",
-    contactMethod: "",
     consent: false,
   });
 
@@ -82,20 +75,18 @@ export default function LeadPopup({ trigger = false, onClose }) {
     setFormData((prev) => ({ ...prev, name: value }));
   };
 
-  // NEW: Check if phone already exists in DB
   const checkPhoneExists = async (phone) => {
     const { data, error } = await supabase
       .from("leads")
       .select("phone")
       .eq("phone", phone)
-      .maybeSingle(); // Returns null if no row
+      .maybeSingle();
 
     if (error && error.code !== "PGRST116") {
-      // PGRST116 = no rows (not an error)
       console.error("Error checking phone:", error);
       return false;
     }
-    return !!data; // true if phone exists
+    return !!data;
   };
 
   const handleNext = async () => {
@@ -110,7 +101,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
       const validPhone = validateIndianMobile(formData.phone);
       if (!validPhone) return setError("Valid mobile number is mandatory.");
 
-      // Check for duplicate phone in DB
       setCheckLoading(true);
       const exists = await checkPhoneExists(validPhone);
       setCheckLoading(false);
@@ -128,29 +118,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
       if (!formData.intent)
         return setError("Please select your purchase intent.");
     }
-    if (step === 3) {
-      if (
-        !formData.configuration ||
-        formData.configuration === "Select Configuration..."
-      )
-        return setError("Please select your preferred configuration.");
-      if (!formData.budget || formData.budget === "Select Budget...")
-        return setError("Please select your approximate budget range.");
-    }
-    if (step === 4) {
-      if (!formData.timeline || formData.timeline === "Planning to purchase?")
-        return setError("Please select your purchase timeline.");
-      if (
-        !formData.siteVisit ||
-        formData.siteVisit === "Schedule a site visit?"
-      )
-        return setError("Please select if you want a site visit.");
-      if (
-        !formData.contactMethod ||
-        formData.contactMethod === "Preferred contact method?"
-      )
-        return setError("Please select your preferred contact method.");
-    }
 
     setError("");
     setStep((prev) => prev + 1);
@@ -159,20 +126,8 @@ export default function LeadPopup({ trigger = false, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    trackEvent({
-      action: "lead_submit",
-      category: "conversion",
-      label: "popup_form",
-    });
     if (!formData.timeline || formData.timeline === "Planning to purchase?")
       return setError("Please select your purchase timeline.");
-    if (!formData.siteVisit || formData.siteVisit === "Schedule a site visit?")
-      return setError("Please select if you want a site visit.");
-    if (
-      !formData.contactMethod ||
-      formData.contactMethod === "Preferred contact method?"
-    )
-      return setError("Please select your preferred contact method.");
     if (!formData.consent)
       return setError("Please provide consent to proceed.");
 
@@ -184,10 +139,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
       phone: validPhone,
       location: formData.location,
       intent: formData.intent,
-      configuration: formData.configuration,
-      budget: formData.budget,
       timeline: formData.timeline,
-      site_visit: formData.siteVisit,
       utm_source: utms.source,
       utm_medium: utms.medium,
       utm_campaign: utms.campaign,
@@ -201,13 +153,18 @@ export default function LeadPopup({ trigger = false, onClose }) {
         .insert(payload);
       if (insertError) {
         setError("Error submitting lead. Please try again.");
-        console.error(insertError);
         return;
       }
+      
+      trackEvent({
+        action: "lead_submit",
+        category: "conversion",
+        label: "popup_form",
+      });
+      
       setSubmitted(true);
     } catch (err) {
       setError("Error submitting lead. Please try again.");
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -226,7 +183,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
         <div className="flex h-1.5 w-full bg-slate-100">
           <motion.div
             className="h-full bg-emerald-500"
-            animate={{ width: `${(step / 4) * 100}%` }}
+            animate={{ width: `${(step / 3) * 100}%` }}
           />
         </div>
 
@@ -265,7 +222,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                 {step === 1 && (
                   <div className="space-y-4">
                     <p className="text-center font-bold text-slate-700">
-                      Let's get started
+                      Identify Yourself
                     </p>
                     <input
                       type="text"
@@ -300,7 +257,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   </div>
                 )}
 
-                {/* Steps 2, 3, 4 remain exactly the same */}
                 {step === 2 && (
                   <div className="space-y-5">
                     <div>
@@ -359,63 +315,17 @@ export default function LeadPopup({ trigger = false, onClose }) {
                         onClick={handleNext}
                         className="flex-1 bg-emerald-600 text-white py-4 rounded-xl font-bold"
                       >
-                        Continue
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {step === 3 && (
-                  <div className="space-y-5">
-                    <div>
-                      <p className="text-sm font-bold text-slate-600 mb-3">
-                        Which configuration interests you?
-                      </p>
-                      <select
-                        className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm"
-                        onChange={(e) =>
-                          handleInputChange("configuration", e.target.value)
-                        }
-                      >
-                        <option>Select Configuration...</option>
-                        <option>3 BHK + Study</option>
-                      </select>
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-600 mb-3">
-                        Approximate Budget Range?
-                      </p>
-                      <select
-                        className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm"
-                        onChange={(e) =>
-                          handleInputChange("budget", e.target.value)
-                        }
-                      >
-                        <option>Select Budget...</option>
-                        <option>₹2.5 Cr – ₹3 Cr</option>
-                        <option>₹3 Cr – ₹3.75 Cr</option>
-                        <option>Would like to discuss</option>
-                      </select>
-                    </div>
-                    <div className="flex gap-3 pt-2">
-                      <button
-                        onClick={() => setStep(2)}
-                        className="flex-1 py-4 text-slate-400 font-bold"
-                      >
-                        Back
-                      </button>
-                      <button
-                        onClick={handleNext}
-                        className="flex-1 bg-emerald-600 text-white py-4 rounded-xl font-bold"
-                      >
                         Next
                       </button>
                     </div>
                   </div>
                 )}
 
-                {step === 4 && (
+                {step === 3 && (
                   <div className="space-y-4">
+                    <p className="text-sm font-bold text-slate-600 mb-1">
+                        When are you planning to purchase?
+                    </p>
                     <select
                       className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm"
                       onChange={(e) =>
@@ -427,26 +337,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
                       <option>1–3 months</option>
                       <option>3–6 months</option>
                       <option>Just exploring</option>
-                    </select>
-                    <select
-                      className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm"
-                      onChange={(e) =>
-                        handleInputChange("siteVisit", e.target.value)
-                      }
-                    >
-                      <option>Schedule a site visit?</option>
-                      <option>Yes, site visit</option>
-                      <option>Not at the moment</option>
-                    </select>
-                    <select
-                      className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none font-medium text-sm"
-                      onChange={(e) =>
-                        handleInputChange("contactMethod", e.target.value)
-                      }
-                    >
-                      <option>Preferred contact method?</option>
-                      <option>Call</option>
-                      <option>WhatsApp</option>
                     </select>
 
                     <label className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl">
@@ -466,7 +356,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
                     <div className="flex gap-3">
                       <button
-                        onClick={() => setStep(3)}
+                        onClick={() => setStep(2)}
                         className="px-4 py-4 text-slate-400 font-bold"
                       >
                         Back
@@ -480,7 +370,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                           "Processing..."
                         ) : (
                           <>
-                            <Download className="w-4 h-4" /> Download Brochure
+                            <Download className="w-4 h-4" />Submit Details
                           </>
                         )}
                       </button>
@@ -502,9 +392,8 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   Brochure Sent!
                 </h3>
                 <p className="text-slate-500 mt-2 text-sm px-2">
-                  Thank you <b>{formData.name}</b>. We have sent the project kit
-                  to <b>{formData.phone}</b> via{" "}
-                  {formData.contactMethod || "WhatsApp"}.
+                  Thank you <b>{formData.name}</b>. We have received your request.
+                  Our team will contact you shortly via Call or WhatsApp.
                 </p>
                 <button
                   onClick={onClose}

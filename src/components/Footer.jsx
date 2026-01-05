@@ -13,7 +13,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
           
-          {/* Brand Info */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
@@ -30,7 +29,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact Details */}
           <div className="lg:col-span-4">
             <h4 className="text-lg font-serif font-bold mb-8 italic">Contact Sales</h4>
             <div className="space-y-6">
@@ -40,7 +38,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Direct Hotline</p>
-                  <p className="text-white font-medium">+91 92115 22011</p>
+                  <p className="text-white font-medium">+91 93115 94047</p>
                 </div>
               </a>
               <div className="flex items-start gap-4">
@@ -55,19 +53,19 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Experience Links */}
           <div className="lg:col-span-3">
             <h4 className="text-lg font-serif font-bold mb-8 italic">Experience</h4>
             <ul className="space-y-4 text-sm font-medium text-slate-400">
               <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#overview">Project Overview</a></li>
               <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#units">Configuration</a></li>
               <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#pricing">Price List</a></li>
-              <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#location">Connectivity</a></li>
+              <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#contact">Contact Us</a></li>
+              {/* Terms Link triggers the #terms hash */}
+              <li className="hover:text-emerald-500 transition-colors cursor-pointer"><a href="#terms">Terms & Conditions</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Legal Disclaimer */}
         <div className="border-t border-slate-900 pt-10 text-center md:text-left">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[11px] text-slate-600 max-w-3xl leading-relaxed italic">
