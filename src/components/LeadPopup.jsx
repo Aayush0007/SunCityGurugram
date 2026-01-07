@@ -108,7 +108,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
       trackEvent({ action: "lead_submit", category: "conversion", label: "whatsapp_popup" });
 
       // 5. WhatsApp Redirection
-      const clientNumber = "919351044351";
+      const clientNumber = "919211522011";
       const message = `Hi, I am interested in Suncity Monarch.%0A%0A*Lead Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0APlease share the brochure and price list.`;
       
       const whatsappUrl = `https://wa.me/${clientNumber}?text=${message}`;
