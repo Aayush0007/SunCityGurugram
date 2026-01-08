@@ -49,7 +49,7 @@ function App() {
         }
         return prev;
       });
-    }, 7000);
+    }, 5000);
 
     return () => {
       window.removeEventListener("hashchange", checkHash);
