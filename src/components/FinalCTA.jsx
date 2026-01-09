@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Phone, Download, Calendar, Sparkles } from 'lucide-react';
+import { Phone, Download, Calendar, Sparkles, ShieldCheck } from 'lucide-react';
 
-export default function FinalCTA() {
+export default function FinalCTA({ openPopup }) {
   return (
-    <section className="py-24 bg-gradient-to-br from-blue-900 via-emerald-800 to-blue-900 text-white overflow-hidden relative">
+    <section className="py-24 bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 text-white overflow-hidden relative">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)]" />
@@ -21,11 +21,11 @@ export default function FinalCTA() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-full mb-8 shadow-2xl">
             <Sparkles className="w-12 h-12 text-white" />
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold font-heading mb-8 bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent">
-            Your Ultra-Luxury Legacy Awaits in Sector-78, Gurugram
+          <h2 className="text-4xl md:text-6xl font-bold font-serif mb-8 bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent leading-tight">
+            Secure Your Elite Address <br className="hidden md:block" /> in Gurugram's Luxury Corridor
           </h2>
-          <p className="text-xl md:text-2xl text-emerald-100 max-w-4xl mx-auto">
-            Limited units available at pre-launch pricing — secure exclusive benefits for early registrants, including priority selection and special inaugural offers.
+          <p className="text-xl md:text-2xl text-emerald-100 max-w-4xl mx-auto leading-relaxed">
+            Exclusive launch benefits up to ₹16 Lakhs* available for Serenity Hills, Elaira Residences, and Aaroham. Secure priority selection across Sectors 80-86 with our pre-launch inaugural offers.
           </p>
         </motion.div>
 
@@ -35,25 +35,34 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col md:flex-row gap-8 justify-center items-center"
+          className="flex flex-col lg:flex-row gap-6 justify-center items-center"
         >
-          <button className="group relative bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-xl px-10 py-5 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 flex items-center gap-4">
-            <Phone className="w-8 h-8 group-hover:scale-110 transition-transform" />
-            Speak to Our Property Expert
+          <button 
+            onClick={openPopup}
+            className="group w-full lg:w-auto bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
+          >
+            <Phone className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            Speak to a Property Expert
           </button>
 
-          <button className="group relative bg-white text-blue-900 font-bold text-xl px-10 py-5 rounded-2xl shadow-2xl hover:shadow-blue-900/30 transition-all duration-300 flex items-center gap-4">
-            <Download className="w-8 h-8 group-hover:scale-110 transition-transform" />
-            Download Brochure & Floor Plans
+          <button 
+            onClick={openPopup}
+            className="group w-full lg:w-auto bg-white text-slate-900 font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-white/20 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
+          >
+            <Download className="w-6 h-6 group-hover:scale-110 transition-transform text-emerald-600" />
+            Download Portfolio Brochure
           </button>
 
-          <button className="group relative bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-xl px-10 py-5 rounded-2xl shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 flex items-center gap-4">
-            <Calendar className="w-8 h-8 group-hover:scale-110 transition-transform" />
-            Schedule Exclusive Site Visit
+          <button 
+            onClick={openPopup}
+            className="group w-full lg:w-auto bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
+          >
+            <Calendar className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            Schedule VIP Site Visit
           </button>
         </motion.div>
 
-        {/* Urgency Note */}
+        {/* Urgency and Trust Note */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -62,11 +71,17 @@ export default function FinalCTA() {
           className="text-center mt-16"
         >
           <p className="text-lg italic text-emerald-200">
-            Act now — Exclusive pre-launch advantages for the first registrants only.
+            Limited inventory release — Act now to leverage curated kid-centric designs and IGBC Platinum sustainable living.
           </p>
-          <p className="text-sm mt-4 text-gray-300">
-            Fully RERA Compliant • Transparent Pricing • Timely Delivery Assured
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8 opacity-70">
+            <div className="flex items-center gap-2 text-sm text-gray-300">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" /> Fully H-RERA Compliant Portfolio
+            </div>
+            <div className="hidden md:block w-1 h-1 bg-gray-500 rounded-full" />
+            <div className="text-sm text-gray-300">
+              Registration Amount: ₹11,00,000/- for Priority Access
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

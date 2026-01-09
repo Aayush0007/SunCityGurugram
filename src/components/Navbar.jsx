@@ -38,12 +38,12 @@ export default function Navbar({ openPopup }) {
   };
 
   const menuItems = [
-    { name: "Overview", id: "overview" },
-    { name: "Units", id: "units" },
+    { name: "Portfolio", id: "overview" }, // Renamed from Overview for a multi-project feel
+    { name: "Residences", id: "units" },    // Renamed to cover 3 & 4 BHK across brands
     { name: "Amenities", id: "amenities" },
     { name: "Pricing", id: "pricing" },
-    { name: "Location", id: "location" },
-    { name: "Contact", id: "contact" },
+    { name: "Connectivity", id: "location" }, // Optimized for SEO/Real Estate intent
+    { name: "Enquire", id: "contact" },
   ];
 
   return (
@@ -72,14 +72,14 @@ export default function Navbar({ openPopup }) {
                   isScrolled ? "text-slate-900" : "text-white"
                 }`}
               >
-                Suncity Monarch
+                Living Luxura
               </span>
               <span
                 className={`text-[8px] uppercase tracking-[0.3em] font-bold mt-1 transition-colors duration-300 ${
                   isScrolled ? "text-emerald-600" : "text-emerald-400"
                 }`}
               >
-                Sector 78, Gurugram
+                Emaar | Conscient | Ashiana
               </span>
             </div>
           </motion.div>
@@ -104,14 +104,14 @@ export default function Navbar({ openPopup }) {
                 trackEvent({
                   action: "cta_click",
                   category: "engagement",
-                  label: "enquire-form",
+                  label: "navbar_enquire_now",
                 });
                 openPopup();
               }}
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-all hover:shadow-xl hover:shadow-emerald-500/20 active:scale-95"
             >
               <Phone className="w-4 h-4" />
-              Enquire Now
+              Priority Booking
             </button>
           </div>
 
@@ -170,13 +170,13 @@ export default function Navbar({ openPopup }) {
                 }}
                 className="mt-6 bg-emerald-600 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl"
               >
-                Contact Expert
+                Contact Luxury Expert
               </motion.button>
             </div>
 
             <div className="absolute bottom-12 flex flex-col items-center text-white/40 italic text-sm">
               <Building2 className="w-6 h-6 mb-2 opacity-20" />
-              <p>Redefining Ultra-Luxury Living</p>
+              <p>Gurugram's Most Coveted Addresses</p>
             </div>
           </motion.div>
         )}

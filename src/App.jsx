@@ -8,13 +8,20 @@ import Footer from "./components/Footer";
 
 // Lazy-loaded sections
 const ProjectOverview = lazy(() => import("./components/ProjectOverview"));
-const UnitConfigurations = lazy(() => import("./components/UnitConfigurations"));
+const WhyChoose = lazy(() => import("./components/WhyChoose"));
+const UnitConfigurations = lazy(() =>
+  import("./components/UnitConfigurations")
+);
 const Amenities = lazy(() => import("./components/Amenities"));
 const Pricing = lazy(() => import("./components/Pricing"));
 const Location = lazy(() => import("./components/Location"));
 const Gallery = lazy(() => import("./components/Gallery"));
+const DeveloperTrust = lazy(() => import("./components/DeveloperTrust"));
+const FinalCTA = lazy(() => import("./components/FinalCTA"));
 const LeadPopup = lazy(() => import("./components/LeadPopup"));
-const TermsAndConditions = lazy(() => import("./components/TermsAndConditions"));
+const TermsAndConditions = lazy(() =>
+  import("./components/TermsAndConditions")
+);
 const ContactForm = lazy(() => import("./components/ContactForm"));
 
 function App() {
@@ -27,12 +34,14 @@ function App() {
 
   useEffect(() => {
     const checkHash = () => {
-      // Listener for Popup
       if (window.location.hash === "#enquire-now") {
         setShowPopup(true);
-        trackEvent({ action: "popup_open", category: "lead", label: "url_hash" });
+        trackEvent({
+          action: "popup_open",
+          category: "lead",
+          label: "url_hash",
+        });
       }
-      // Listener for Terms
       if (window.location.hash === "#terms") {
         setShowTerms(true);
       }
@@ -44,7 +53,11 @@ function App() {
     const timer = setTimeout(() => {
       setShowPopup((prev) => {
         if (!prev && !showTerms) {
-          trackEvent({ action: "popup_open", category: "lead", label: "auto_timer" });
+          trackEvent({
+            action: "popup_open",
+            category: "lead",
+            label: "auto_timer",
+          });
           return true;
         }
         return prev;
@@ -64,13 +77,12 @@ function App() {
 
   const closePopup = () => {
     setShowPopup(false);
-    // Clear hash without jump
-    window.history.replaceState(null, null, ' ');
+    window.history.replaceState(null, null, " ");
   };
 
   const closeTerms = () => {
     setShowTerms(false);
-    window.history.replaceState(null, null, ' ');
+    window.history.replaceState(null, null, " ");
   };
 
   return (
@@ -79,15 +91,48 @@ function App() {
 
       <main>
         <Hero openPopup={openPopup} />
-        <Suspense fallback={<div className="h-20 flex items-center justify-center italic text-slate-400">Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="h-20 flex items-center justify-center italic text-slate-400">
+              Loading...
+            </div>
+          }
+        >
           <article>
-            <section id="overview" className="py-16"><ProjectOverview /></section>
-            <section id="units" className="py-16 bg-gray-50"><UnitConfigurations openPopup={openPopup} /></section>
-            <section id="amenities" className="py-16"><Amenities /></section>
-            <section id="pricing" className="py-16 bg-gray-50"><Pricing openPopup={openPopup} /></section>
-            <section id="location" className="py-16"><Location /></section>
-            <section id="gallery" className="py-16"><Gallery /></section>
-            <section id="contact" className="py-24 bg-slate-50"><ContactForm /></section>
+            <section id="overview" className="py-16">
+              <ProjectOverview />
+            </section>
+            <section id="why-choose" className="py-16">
+              <WhyChoose />
+            </section>
+            <section id="units" className="py-16 bg-gray-50">
+              <UnitConfigurations openPopup={openPopup} />
+            </section>
+            <section id="amenities" className="py-16">
+              <Amenities />
+            </section>
+            <section id="pricing" className="py-16 bg-gray-50">
+              <Pricing openPopup={openPopup} />
+            </section>
+            <section id="location" className="py-16">
+              <Location />
+            </section>
+            <section id="gallery" className="py-16">
+              <Gallery />
+            </section>
+
+            {/* ✅ DeveloperTrust included here to build authority before the final CTA */}
+            <section id="trust" className="py-16 bg-gray-50">
+              <DeveloperTrust />
+            </section>
+
+            <section id="final-cta">
+              <FinalCTA openPopup={openPopup} />
+            </section>
+
+            <section id="contact" className="py-24 bg-white">
+              <ContactForm />
+            </section>
           </article>
         </Suspense>
       </main>

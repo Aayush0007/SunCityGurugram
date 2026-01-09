@@ -5,21 +5,25 @@ import Trees from "lucide-react/dist/esm/icons/trees";
 import Home from "lucide-react/dist/esm/icons/home";
 import Trophy from "lucide-react/dist/esm/icons/trophy";
 import Sparkles from "lucide-react/dist/esm/icons/sparkles";
-import Phone from "lucide-react/dist/esm/icons/phone";
 import Download from "lucide-react/dist/esm/icons/download";
 import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+
+// Import local video asset
+import heroVideo from "../Assets/VD2.mp4";
 
 import { trackEvent } from "../utils/analytics";
 
 export default function Hero({ openPopup }) {
   const [quickPhone, setQuickPhone] = useState("");
 
-  
   const handleQuickLead = (e) => {
     e.preventDefault();
     if (quickPhone.length >= 10) {
-      // Pass the phone to the global state or open popup
-      // To keep it simple: we open the main qualified form
+      trackEvent({
+        action: "quick_lead_submit",
+        category: "engagement",
+        label: "hero_form",
+      });
       openPopup();
     }
   };
@@ -27,36 +31,39 @@ export default function Hero({ openPopup }) {
   const highlights = [
     {
       icon: <Home className="w-8 h-8 text-emerald-400" />,
-      title: "Ultra-Low Density",
-      desc: "Only 45 units per acre for unparalleled privacy.",
+      title: "Premium Living",
+      desc: "Low-density ultra-luxury residences in prime corridors.",
     },
     {
       icon: <Trophy className="w-8 h-8 text-amber-400" />,
-      title: "Sports Ecosystem",
-      desc: "Massive 3.5 Lakh Sq. Ft. world-class sports arena.",
+      title: "Elite Amenities",
+      desc: "Up to 3.5 Lakh Sq. Ft. world-class sports & club ecosystems.",
     },
     {
       icon: <Trees className="w-8 h-8 text-emerald-400" />,
-      title: "90% Open Greens",
-      desc: "Designed for wellness-focused premium living.",
+      title: "Nature & Wellness",
+      desc: "Over 20 acres of open green spaces and waterfront trails.",
     },
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
-      {/* Background Image with Optimized Overlay */}
+      {/* Background Video Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://royalresidencies.com/wp-content/uploads/2025/07/aipl-lake-city-gurgaon.jpeg"
-          alt="Suncity Monarch Aerial View"
-          className="w-full h-full object-cover object-center opacity-60 bg-fixed"
+        <video
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-50"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-900" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Branding & Value Proposition */}
+          {/* Left Side: Branding & Multi-Project Portfolio */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -68,20 +75,18 @@ export default function Hero({ openPopup }) {
               transition={{ delay: 0.3 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-[0.2em] mb-6"
             >
-              <Sparkles className="w-4 h-4" /> New Launch: Sector 78, Gurugram
+              <Sparkles className="w-4 h-4" /> Emaar | Conscient | Ashiana
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6">
-              Suncity <span className="text-emerald-400">Monarch</span>
+              The Finest in <span className="text-emerald-400">Gurugram</span>
               <span className="block text-3xl md:text-4xl mt-4 font-sans font-light tracking-tight text-slate-300">
-                The Zenith of Low-Density Luxury
+                Curated Luxury for Discerning Families
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-xl leading-relaxed">
-              Experience expansive 3 & 4 BHK residences starting at ₹16,000/sq.
-              ft. Featuring a 1.5 Lakh sq. ft. Clubhouse and India's finest
-              sports infrastructure.
+              Explore ultra-luxury 3 & 4 BHK residences starting at ₹2.98 Cr* in Gurgaon's most coveted sectors.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -96,13 +101,13 @@ export default function Hero({ openPopup }) {
                 }}
                 className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-emerald-900/20"
               >
-                Download Price List
+                Download Portfolio Kit
               </button>
               <button
                 onClick={openPopup}
                 className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all"
               >
-                Schedule Site Visit
+                Request Site Visit
               </button>
             </div>
 
@@ -120,7 +125,7 @@ export default function Hero({ openPopup }) {
                   <h4 className="text-white font-bold text-sm mb-1">
                     {item.title}
                   </h4>
-                  <p className="text-slate-500 text-xs leading-tight">
+                  <p className="text-slate-500 text-[10px] leading-tight">
                     {item.desc}
                   </p>
                 </motion.div>
@@ -142,8 +147,7 @@ export default function Hero({ openPopup }) {
                 Priority Access
               </h3>
               <p className="text-slate-500 text-sm mb-8">
-                Register now to receive the brochure, floor plans, and
-                pre-launch pricing.
+                Register for exclusive launch benefits up to ₹16 Lakhs* across our luxury portfolio.
               </p>
 
               <form onSubmit={handleQuickLead} className="space-y-4">
@@ -155,6 +159,8 @@ export default function Hero({ openPopup }) {
                     type="tel"
                     placeholder="Mobile Number"
                     required
+                    pattern="[6-9][0-9]{9}"
+                    title="Please enter a valid 10-digit Indian mobile number"
                     className="w-full pl-16 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-xl focus:border-emerald-500 outline-none transition-all text-slate-900 font-semibold"
                     onChange={(e) => setQuickPhone(e.target.value)}
                   />
@@ -164,7 +170,7 @@ export default function Hero({ openPopup }) {
                   type="submit"
                   className="w-full bg-slate-900 hover:bg-black text-white py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl shadow-slate-200"
                 >
-                  <Download className="w-5 h-5" /> Get Project Kit
+                  <Download className="w-5 h-5" /> Get Portfolio Access
                 </button>
               </form>
 
@@ -176,32 +182,30 @@ export default function Hero({ openPopup }) {
                       className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden"
                     >
                       <img
-                        src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                        alt="User"
+                        src={`https://i.pravatar.cc/100?img=${i + 15}`}
+                        alt="Interested Buyer"
                       />
                     </div>
                   ))}
                 </div>
                 <p className="text-[11px] text-slate-400 leading-tight">
                   <span className="text-emerald-600 font-bold">
-                    140+ People
+                    Join 500+ Families
                   </span>{" "}
-                  registered for <br /> site visits this week.
+                  interested in Gurugram's <br /> greenest communities.
                 </p>
               </div>
 
               <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-slate-400 uppercase tracking-widest font-bold">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" /> RERA
-                Registered Project
+                <ShieldCheck className="w-4 h-4 text-emerald-500" /> HRERA Registered
               </div>
             </div>
 
-            {/* Floating Trust Badge */}
             <div className="absolute -bottom-6 -right-6 bg-amber-400 text-slate-900 p-4 rounded-2xl shadow-xl font-bold text-center rotate-3 hidden md:block">
               <p className="text-[10px] uppercase tracking-tighter">
                 Limited Period
               </p>
-              <p className="text-xl leading-none italic">Pre-Launch Offers</p>
+              <p className="text-xl leading-none italic">Exclusive Launch Benefits</p>
             </div>
           </motion.div>
         </div>

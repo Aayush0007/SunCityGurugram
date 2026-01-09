@@ -5,46 +5,46 @@ import Dumbbell from 'lucide-react/dist/esm/icons/dumbbell';
 import Waves from 'lucide-react/dist/esm/icons/waves';
 import Trophy from 'lucide-react/dist/esm/icons/trophy';
 import Trees from 'lucide-react/dist/esm/icons/trees';
-import Users from 'lucide-react/dist/esm/icons/users';
+import Ship from 'lucide-react/dist/esm/icons/ship';
 
 const amenities = [
   {
     icon: <Building2 className="w-8 h-8 text-blue-700" />,
-    title: "1.5L Sq. Ft. Grand Clubhouse",
-    desc: "A sprawling social epicenter with fine dining, a luxury spa, and a grand ballroom for elite gatherings.",
+    title: "Dual 75,000 Sq. Ft. Clubhouses",
+    desc: "Luxury lifestyle hubs at Elaira and Serenity Hills featuring fine dining, temperature-controlled pools, and elite social spaces.",
     img: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg",
-    featured: true, // Takes more space
+    featured: true,
   },
   {
-    icon: <Dumbbell className="w-8 h-8 text-emerald-600" />,
-    title: "3.5L Sq. Ft. Sports Ecosystem",
-    desc: "India's largest residential sports arena with professional academies for cricket, tennis, and swimming.",
+    icon: <Trophy className="w-8 h-8 text-amber-600" />,
+    title: "Pro-Sports Ecosystem",
+    desc: "Ashiana Aaroham's curated arena with football fields, box cricket, tennis, and professional skating rinks[cite: 30, 45].",
     img: "https://bsmedia.business-standard.com/_media/bs/img/article/2024-06/17/full/20240617124554.jpg",
     featured: true,
   },
   {
-    icon: <Waves className="w-8 h-8 text-blue-600" />,
-    title: "Infinity Edge Pool",
-    desc: "Temperature-controlled pool with a resort-style deck and dedicated kids' splash zone.",
+    icon: <Ship className="w-8 h-8 text-cyan-600" />,
+    title: "Waterfront Promenade",
+    desc: "A refreshing waterfront walkway and walking promenade integrated within 20+ acres of landscaped greenery.",
     img: "https://sreindiarealty.com/uploads/blog/experion-the-trillion-redefining-luxury-living-in-sector-48-gurgaon.jpg",
   },
   {
-    icon: <Trophy className="w-8 h-8 text-amber-600" />,
-    title: "Professional Courts",
-    desc: "International-standard floodlit courts for badminton, squash, and basketball.",
-    img: "https://gallantsports.in/wp-content/uploads/2025/03/Multi-Sport-Arena.jpg",
-  },
-  {
     icon: <Trees className="w-8 h-8 text-emerald-700" />,
-    title: "90% Green Landscape",
-    desc: "A lush 16-acre expanse featuring themed botanical gardens and mist trails.",
+    title: "Miyawaki Forest Trails",
+    desc: "Aaroham's dense Miyawaki plantations and Miyawaki forests providing a carbon-neutral, safe green ecosystem.",
     img: "https://www.green-valley.site/assets/img/g8.webp",
   },
   {
-    icon: <Users className="w-8 h-8 text-indigo-600" />,
-    title: "Family Leisure Zones",
-    desc: "Safe, vibrant children's parks and senior citizen seating alcoves for holistic living.",
+    icon: <Building2 className="w-8 h-8 text-indigo-600" />,
+    title: "Kid-Centric Learning Hub",
+    desc: "A dedicated hub for music, dance, art, and study curated by Hearth Education Advisors[cite: 59, 70].",
     img: "https://www.rsbmglobal.com/storage/dlf-privana-north-76-1-compressed.jpg",
+  },
+  {
+    icon: <Waves className="w-8 h-8 text-blue-600" />,
+    title: "Five-Zone Aquatic Deck",
+    desc: "Featuring infinity edge pools, temperature-controlled lap pools, and dedicated splash zones for toddlers.",
+    img: "https://gallantsports.in/wp-content/uploads/2025/03/Multi-Sport-Arena.jpg",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function Amenities() {
             viewport={{ once: true }}
             className="text-xs uppercase tracking-[0.5em] text-emerald-600 font-bold mb-4"
           >
-            The Lifestyle Ecosystem
+            The Ultimate Lifestyle Portfolio
           </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ export default function Amenities() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6"
           >
-            Beyond Ordinary <span className="italic">Leisure</span>
+            Redefining Green <span className="italic text-emerald-700">Urbanism</span>
           </motion.h2>
           <div className="w-20 h-1 bg-emerald-500 rounded-full" />
         </div>
@@ -115,14 +115,10 @@ export default function Amenities() {
                 </p>
               </div>
 
-              {/* Decorative Subtle Detail */}
               <div className="absolute bottom-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-tl-full translate-x-12 translate-y-12 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700" />
             </motion.div>
           ))}
         </div>
-
-        {/* Interactive Comparison Element */}
-        
 
         {/* Global Standard Trust Bar */}
         <motion.div 
@@ -131,13 +127,13 @@ export default function Amenities() {
           className="mt-24 py-12 border-t border-slate-100 flex flex-wrap justify-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500"
         >
           <div className="flex items-center gap-2 font-bold text-slate-400">
-             <Trophy className="w-5 h-5" /> FIFA Standard Courts
+             <Trophy className="w-5 h-5" /> Professional Academies [cite: 82]
           </div>
           <div className="flex items-center gap-2 font-bold text-slate-400">
-             <Building2 className="w-5 h-5" /> 7-Star Hospitality
+             <Building2 className="w-5 h-5" /> IGBC Pre-Certified
           </div>
           <div className="flex items-center gap-2 font-bold text-slate-400">
-             <Waves className="w-5 h-5" /> Olympic-Size Pool
+             <Waves className="w-5 h-5" /> Temperature Controlled Pools
           </div>
         </motion.div>
       </div>

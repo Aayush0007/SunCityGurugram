@@ -1,24 +1,54 @@
 import { motion } from 'framer-motion';
 import Camera from 'lucide-react/dist/esm/icons/camera';
+import ExternalLink from 'lucide-react/dist/esm/icons/external-link';
 
 // Local Video Imports
 import vd1 from '../Assets/VD1.mp4';
 import vd2 from '../Assets/VD2.mp4';
 
 const galleryItems = [
-  // Video Items added as featured content
-  { src: vd1, alt: "Suncity Monarch Cinematic Tour", category: "Video", type: "video", featured: true },
-  { src: vd2, alt: "Lifestyle & Sports Arena Walkthrough", category: "Video", type: "video", featured: true },
+  // FEATURED: New Serenity Hills Walkthrough (YouTube Link Support)
+  { 
+    src: "https://youtu.be/WYWZvjNQ16w", 
+    alt: "Serenity Hills | Official Walkthrough | Emaar India", 
+    category: "Walkthrough", 
+    type: "external_video", 
+    featured: true 
+  },
+
+  // FEATURED: Ashiana Aaroham Masterplan
+  { 
+    src: "https://propertyingurugrams.com/wp-content/uploads/2025/12/Suncity-Monarch-Sector-78-Gurgaon.webp", 
+    alt: "Ashiana Aaroham Site Map & Masterplan [cite: 13]", 
+    category: "Masterplan", 
+    type: "image", 
+    featured: true 
+  },
+
+  // Local Video Items
+  { src: vd1, alt: "Suncity Monarch Cinematic Tour", category: "Video", type: "video", featured: false },
+  { src: vd2, alt: "Lifestyle & Sports Arena Walkthrough", category: "Video", type: "video", featured: false },
   
-  // Existing Image Items
-  { src: "https://propertyingurugrams.com/wp-content/uploads/2025/12/Suncity-Monarch-Sector-78-Gurgaon.webp", alt: "Suncity Monarch Aerial View", category: "Masterplan", type: "image", featured: true },
-  { src: "https://imgcdn.houssed.com/assets/Files/Projects/4373/Project%20Image/39f679252d745fe5fd002fab88e57cc4.webp", alt: "Modern Towers Architecture", category: "Masterplan", type: "image", featured: false },
-  { src: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg", alt: "Grand Clubhouse Lounge", category: "Clubhouse", type: "image", featured: false },
-  { src: "https://assets.architecturaldigest.in/photos/61d81c6a72d576bd83b83926/3:2/w_1620,h_1080,c_limit/DLF%20Camellias%20Gurugram-1.jpg", alt: "Premium Social Spaces", category: "Clubhouse", type: "image", featured: true },
-  { src: "https://img.staticmb.com/mbcontent/images/crop/uploads/2025/8/Landmark-Skyvue-Sector-103_600_900.jpg.webp", alt: "Infinity Edge Pool", category: "Amenities", type: "image", featured: false },
-  { src: "https://www.affordablehomesgurgaon.in/wp-content/uploads/2023/01/M3M-Antalya-Hills-Multiple-Courts-1024x576.jpg", alt: "Multi-Sport Arena", category: "Sports Arena", type: "image", featured: false },
-  { src: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg", alt: "Ultra-Luxury Living Room", category: "Interiors", type: "image", featured: true },
-  { src: "https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon-1024x645.png", alt: "Master Bedroom View", category: "Interiors", type: "image", featured: false },
+  // Floor Plans & Internal Layouts
+  { 
+    src: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg", 
+    alt: "4 BHK + 4 Toilet (Type-1) 1521 sqft Layout [cite: 289, 292]", 
+    category: "Floor Plan", 
+    type: "image", 
+    featured: true 
+  },
+  { 
+    src: "https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon-1024x645.png", 
+    alt: "3 BHK + 3 Toilet (Type-3) 1259 sqft Layout [cite: 327, 330]", 
+    category: "Floor Plan", 
+    type: "image", 
+    featured: false 
+  },
+
+  // Lifestyle & Amenities
+  { src: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg", alt: "75,000 Sq. Ft. Designer Clubhouse", category: "Clubhouse", type: "image", featured: false },
+  { src: "https://img.staticmb.com/mbcontent/images/crop/uploads/2025/8/Landmark-Skyvue-Sector-103_600_900.jpg.webp", alt: "Infinity Edge Pool & Kids Pool [cite: 98]", category: "Amenities", type: "image", featured: false },
+  { src: "https://www.affordablehomesgurgaon.in/wp-content/uploads/2023/01/M3M-Antalya-Hills-Multiple-Courts-1024x576.jpg", alt: "International Standard Sports Arena [cite: 30]", category: "Sports", type: "image", featured: false },
 ];
 
 export default function Gallery() {
@@ -39,7 +69,7 @@ export default function Gallery() {
             A Glimpse of <span className="italic text-emerald-700">Perfection</span>
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-            Visualise your life at Suncity Monarch. From the 1.5L sq. ft. clubhouse to the expansive sports arena.
+            Explore the curated Kid-Centric residences at Aaroham and the sustainable IGBC Platinum community at Serenity Hills.
           </p>
         </div>
 
@@ -56,7 +86,7 @@ export default function Gallery() {
                 item.featured ? 'md:col-span-2 md:row-span-2' : 'col-span-1 row-span-1'
               }`}
             >
-              {/* Conditional Rendering for Image or Video */}
+              {/* Conditional Rendering for Image, Local Video, or External Link */}
               {item.type === "video" ? (
                 <video
                   src={item.src}
@@ -66,6 +96,22 @@ export default function Gallery() {
                   loop
                   playsInline
                 />
+              ) : item.type === "external_video" ? (
+                <div className="relative w-full h-full bg-slate-900 flex items-center justify-center">
+                  <img 
+                    src="https://img.youtube.com/vi/WYWZvjNQ16w/maxresdefault.jpg" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    alt="Video Thumbnail"
+                  />
+                  <a 
+                    href={item.src} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="relative z-10 bg-white/20 backdrop-blur-md p-6 rounded-full border border-white/30 hover:bg-emerald-600 transition-colors group/btn"
+                  >
+                    <ExternalLink className="w-8 h-8 text-white group-hover/btn:scale-110 transition-transform" />
+                  </a>
+                </div>
               ) : (
                 <img
                   src={item.src}
@@ -80,7 +126,7 @@ export default function Gallery() {
                 <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-[0.3em] mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   {item.category}
                 </span>
-                <h4 className="text-white font-serif text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <h4 className="text-white font-serif text-sm md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-700 leading-tight">
                   {item.alt}
                 </h4>
               </div>

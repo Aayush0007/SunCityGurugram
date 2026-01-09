@@ -9,8 +9,10 @@ import Building2 from 'lucide-react/dist/esm/icons/building-2';
 import Plane from 'lucide-react/dist/esm/icons/plane';
 
 const connectivity = [
-  { place: "NH-48 (Delhi-Jaipur Expy)", time: "05 Mins", icon: <Car className="w-4 h-4" /> },
+  { place: "Karma Lakelands", time: "05 Mins", icon: <MapPin className="w-4 h-4" /> }, // [cite: 155, 176]
+  { place: "NH-48 (Delhi-Jaipur Expy)", time: "05 Mins", icon: <Car className="w-4 h-4" /> }, // [cite: 159]
   { place: "Southern Peripheral Road", time: "02 Mins", icon: <MapPin className="w-4 h-4" /> },
+  { place: "Dwarka Expressway", time: "10 Mins", icon: <Building2 className="w-4 h-4" /> }, // [cite: 159]
   { place: "Cyber City / Golf Course Rd", time: "25 Mins", icon: <Building2 className="w-4 h-4" /> },
   { place: "IGI Airport (T3)", time: "35 Mins", icon: <Plane className="w-4 h-4" /> },
 ];
@@ -18,17 +20,17 @@ const connectivity = [
 const landmarks = [
   {
     category: "Education",
-    items: "The Moksh Intl, DPS Sec 84, Mount Olympus, Yaduvanshi Intl.",
+    items: "St. Xavier's (8 mins), DPS Sec 84 (12 mins), Maitrikiran (13 mins), Vega School[cite: 271, 273, 275, 277].",
     icon: <School className="w-6 h-6 text-emerald-600" />,
   },
   {
     category: "Healthcare",
-    items: "Medanta Medicity, Artemis, Fortis, Genesis Hospital.",
+    items: "Miracles Apollo (9 mins), Fortis Manesar (12 mins), Aarvy Hospital (13 mins), Medanta[cite: 237, 239, 241, 245].",
     icon: <Hospital className="w-6 h-6 text-indigo-600" />,
   },
   {
     category: "Retail & Leisure",
-    items: "Sapphire 83, Town Square, Airia Mall, Ambience Mall.",
+    items: "Elan Mercado (5 mins), Iris Broadway (9 mins), Airia Mall, Entertainland Mall[cite: 202, 204, 206, 193].",
     icon: <ShoppingBag className="w-6 h-6 text-amber-600" />,
   },
 ];
@@ -46,9 +48,9 @@ export default function Location() {
             viewport={{ once: true }}
             className="max-w-2xl"
           >
-            <span className="text-xs uppercase tracking-[0.5em] text-emerald-600 font-bold mb-4 block">Strategic Positioning</span>
+            <span className="text-xs uppercase tracking-[0.5em] text-emerald-600 font-bold mb-4 block">The New Growth Epicenter</span>
             <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 leading-tight">
-              Sector 78: Gurugram's <span className="italic">New Alpha</span> Corridor
+              Sectors 78-86: Gurugram's <span className="italic">Luxury</span> Corridor
             </h2>
           </motion.div>
           <motion.div 
@@ -57,10 +59,9 @@ export default function Location() {
             viewport={{ once: true }}
             className="bg-slate-50 p-6 rounded-2xl border border-slate-100 hidden md:block"
           >
-            <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Google Maps Rating</p>
-            <div className="flex items-center gap-1 text-amber-500">
-              {[1,2,3,4,5].map(i => <SparkleIcon key={i} />)}
-              <span className="ml-2 text-slate-900 font-bold">4.8/5</span>
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Portfolio Proximity</p>
+            <div className="flex items-center gap-1 text-emerald-600 font-bold">
+               Suncity | Emaar | Conscient | Ashiana
             </div>
           </motion.div>
         </div>
@@ -75,34 +76,34 @@ export default function Location() {
           >
             <img
               src="https://www.luxuryresidencesindia.in/suncity-sector-78-gurgaon/images/location-map.webp"
-              alt="Sector 78 Connectivity Map"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              alt="Sector 78, 80 and 86 Connectivity Map featuring Serenity Hills and Elaira Residences"
+              className="w-full h-full object-cover transition-all duration-700"
             />
             <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl max-w-xs border border-white/50">
               <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Live Location Status</p>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">Strategically nestled between NH-48 and SPR for zero-bottleneck travel.</p>
+              <p className="text-xs text-slate-600 leading-relaxed font-medium">Perfectly balanced between Karma Lakelands and the high-speed NH-48 corridor[cite: 151, 155].</p>
             </div>
           </motion.div>
 
           {/* Connectivity Timeline Section */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <h4 className="text-2xl font-serif font-bold text-slate-900 mb-8">Minutes Away From Everything</h4>
-            <div className="space-y-6">
+            <h4 className="text-2xl font-serif font-bold text-slate-900 mb-8">Travel Times by Google Maps [cite: 287]</h4>
+            <div className="space-y-4">
               {connectivity.map((item, i) => (
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-center justify-between p-5 bg-slate-50 rounded-2xl border border-transparent hover:border-emerald-100 hover:bg-white hover:shadow-xl transition-all group"
+                  className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-emerald-100 hover:bg-white hover:shadow-xl transition-all group"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-sm">
                       {item.icon}
                     </div>
                     <span className="text-sm font-bold text-slate-700">{item.place}</span>
                   </div>
-                  <span className="text-sm font-serif font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg">
+                  <span className="text-xs font-serif font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg">
                     {item.time}
                   </span>
                 </motion.div>
@@ -125,7 +126,7 @@ export default function Location() {
                 {landmark.icon}
               </div>
               <h5 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-white transition-colors">{landmark.category}</h5>
-              <p className="text-xs leading-relaxed text-slate-500 group-hover:text-slate-400 transition-colors">
+              <p className="text-[11px] leading-relaxed text-slate-500 group-hover:text-slate-400 transition-colors">
                 {landmark.items}
               </p>
             </motion.div>
@@ -134,9 +135,9 @@ export default function Location() {
 
         {/* Local SEO Text Hook */}
         <div className="mt-20 pt-10 border-t border-slate-100 text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-4">Investment Potential</p>
-          <p className="text-sm text-slate-500 max-w-3xl mx-auto italic leading-relaxed">
-            Sector-78 is currently Gurugram's fastest-growing residential corridor. With the integration of the Southern Peripheral Road (SPR) and the upcoming Metro extension, property values are projected to appreciate significantly by the time of possession.
+          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-4">Prime Micro-Market SEO</p>
+          <p className="text-sm text-slate-500 max-w-4xl mx-auto italic leading-relaxed">
+            The Sector 80-86 micro-market is emerging as Gurugram's most premium low-density hub, with Elaira and Serenity Hills leading the IGBC-certified green movement. Proximity to Aravali Hills and world-class golf courses makes this an unparalleled end-user destination.
           </p>
         </div>
       </div>

@@ -1,116 +1,141 @@
 import { motion } from 'framer-motion';
-import { Trees, ShieldCheck, Trophy, Home, MapPin, Sparkles } from 'lucide-react';
+import { Trees, ShieldCheck, Trophy, Home, MapPin, Sparkles, Leaf, ArrowUpRight } from 'lucide-react';
 
 const reasons = [
   {
-    icon: <Trees className="w-12 h-12 text-emerald-600" />,
-    title: "Unmatched Low-Density Living",
-    desc: "Only ~45 units per acre across ~16 acres (+5 acres future phase) with 90% open & green spaces — rare privacy in Gurugram.",
-    img: "https://www.green-valley.site/assets/img/g8.webp", // Aerial green view
-    alt: "Expansive low-density township with lush greens and elegant towers",
+    icon: <Leaf className="w-8 h-8 text-emerald-600" />,
+    title: "Platinum Green Living",
+    desc: "Experience Serenity Hills' IGBC Platinum Pre-Certified community with 25+ acres of nature and 8 acres of central greens.",
+    img: "https://www.green-valley.site/assets/img/g8.webp",
+    category: "Sustainability"
   },
   {
-    icon: <Sparkles className="w-12 h-12 text-amber-600" />,
-    title: "World-Class Sports & Lifestyle Amenities",
-    desc: "1.5 Lakh sq. ft. grand clubhouse + 3.5 Lakh sq. ft. dedicated sports arena — international-standard facilities for all ages.",
-    img: "https://www.hiranandaniparks.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffitness-luxury-club-de-royale-hiranandani-parks2.3b9ba817.jpg&w=2048&q=75", // Sports facilities
-    alt: "Luxury sports arena with swimming pool, gym, and courts",
+    icon: <Trophy className="w-8 h-8 text-amber-600" />,
+    title: "Kid-Centric Learning Hub",
+    desc: "Ashiana Aaroham offers a dedicated Hub for music, arts, and professional sports academies like football and tennis.",
+    img: "https://www.hiranandaniparks.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffitness-luxury-club-de-royale-hiranandani-parks2.3b9ba817.jpg&w=2048&q=75",
+    category: "Family Wellness"
   },
   {
-    icon: <Home className="w-12 h-12 text-blue-600" />,
-    title: "Spacious Premium Residences",
-    desc: "3 & 4 BHK homes (2,350–3,150 sq. ft.) with large balconies, natural light, cross-ventilation, and modern efficiency.",
-    img: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg", // Luxury interior
-    alt: "Ultra-luxury apartment interior with expansive views and natural light",
+    icon: <Home className="w-8 h-8 text-blue-600" />,
+    title: "Master-Planned Privacy",
+    desc: "Low-density architectural mastery featuring 34-floor high-rise towers and expansive 75,000 sq. ft. clubhouses.",
+    img: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg",
+    category: "Architecture"
   },
   {
-    icon: <Trophy className="w-12 h-12 text-emerald-600" />,
-    title: "Strong Investment Potential",
-    desc: "New launch pricing ~₹16,000/sq. ft. in a prime growth corridor — ideal for end-users, NRIs, and long-term appreciation.",
-    img: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg", // Clubhouse luxury
-    alt: "Grand luxury clubhouse interior",
+    icon: <Sparkles className="w-8 h-8 text-emerald-600" />,
+    title: "Exclusive Launch Perks",
+    desc: "Unlock inaugural benefits up to ₹16 Lakhs at Aaroham with entry pricing from ₹2.98 Cr for premium residences.",
+    img: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg",
+    category: "Investment"
   },
   {
-    icon: <MapPin className="w-12 h-12 text-indigo-600" />,
-    title: "Strategic Location & Connectivity",
-    desc: "Sector-78 with seamless access to NH-8, Southern Peripheral Road (SPR), business hubs, schools, and hospitals.",
-    img: "https://img.staticmb.com/mbcontent/images/crop/uploads/2023/2/Southern-Peripheral-Road-Map_0_1200.jpg.webp", // SPR map
-    alt: "Southern Peripheral Road connectivity map in Gurugram",
+    icon: <MapPin className="w-8 h-8 text-indigo-600" />,
+    title: "Prime Growth Corridor",
+    desc: "Strategic placement in Sectors 80-86 near NH-48 and Karma Lakelands for seamless NCR connectivity.",
+    img: "https://img.staticmb.com/mbcontent/images/crop/uploads/2023/2/Southern-Peripheral-Road-Map_0_1200.jpg.webp",
+    category: "Connectivity"
   },
   {
-    icon: <ShieldCheck className="w-12 h-12 text-blue-600" />,
-    title: "Trusted Developer & Compliance",
-    desc: "Backed by Suncity Projects' legacy of excellence, timely delivery, and full RERA compliance for complete peace of mind.",
-    img: "https://www.mvn.in/uploads/blog/1756198427957.webp", // Another luxury interior/green view
-    alt: "Modern luxury living space with premium finishes",
+    icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+    title: "RERA Certified Trust",
+    desc: "Fully compliant portfolio (HRERA 993/994 of 2025) ensuring transparent delivery by Emaar, Conscient, and Ashiana.",
+    img: "https://www.mvn.in/uploads/blog/1756198427957.webp",
+    category: "Compliance"
   },
 ];
 
 export default function WhyChoose() {
   return (
-    <section className="py-24 bg-gradient-to-b from-emerald-50 via-white to-gray-50 overflow-hidden">
+    <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-8 bg-gradient-to-r from-blue-800 to-emerald-700 bg-clip-text text-transparent">
-            Why Choose This Ultra-Luxury Masterpiece?
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto">
-            A rare combination of serenity, luxury, wellness, and investment growth in Gurugram's most promising corridor.
-          </p>
-        </motion.div>
+        
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs uppercase tracking-[0.5em] text-emerald-600 font-bold mb-4"
+          >
+            The Decision Factor
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6 leading-tight"
+          >
+            A Selection of <span className="italic text-emerald-700">Unmatched</span> Value
+          </motion.h2>
+          <div className="w-24 h-1 bg-emerald-500 rounded-full" />
+        </div>
 
-        {/* Reasons Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {reasons.map((reason, index) => (
+        {/* Masonry-Inspired Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reasons.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
-              whileHover={{ y: -12, scale: 1.03 }}
-              className="group relative bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 transition-all duration-500"
+              whileHover={{ y: -10 }}
+              className="group relative bg-slate-50 rounded-[2.5rem] overflow-hidden border border-slate-100 hover:border-emerald-100 hover:bg-white hover:shadow-2xl transition-all duration-500"
             >
-              {/* Image */}
-              <div className="h-64 overflow-hidden">
+              {/* Media Container */}
+              <div className="h-56 overflow-hidden relative">
                 <img
-                  src={reason.img}
-                  alt={reason.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/10 to-transparent opacity-60" />
+                
+                {/* Floating Category Tag */}
+                <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-widest">
+                  {item.category}
+                </div>
               </div>
 
-              {/* Content */}
-              <div className="p-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-full mb-6 shadow-md">
-                  {reason.icon}
+              {/* Text Content */}
+              <div className="p-10 relative">
+                {/* Icon Glass Container */}
+                <div className="absolute -top-12 left-10 w-20 h-20 bg-white rounded-3xl shadow-xl flex items-center justify-center border border-slate-50 group-hover:bg-emerald-600 transition-colors duration-500">
+                  <div className="group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                    {item.icon}
+                  </div>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900">{reason.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{reason.desc}</p>
+
+                <div className="mt-8">
+                  <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    {item.desc}
+                  </p>
+                  
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-emerald-600 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    Verified Project Detail <ArrowUpRight className="w-3 h-3" />
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Closing */}
+        {/* Closing Tagline */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-center mt-20"
+          transition={{ duration: 1, delay: 0.5 }}
+          className="text-center mt-24 pt-12 border-t border-slate-100"
         >
-          <p className="text-2xl italic text-gray-800 font-medium">
-            Elevate your lifestyle with a home that offers more than luxury —
-            <span className="text-emerald-700 font-bold"> it promises a legacy.</span>
+          <p className="text-2xl md:text-3xl italic text-slate-800 font-serif leading-snug">
+            Investing in a future that prioritizes <br className="hidden md:block" />
+            <span className="text-emerald-700 font-bold not-italic">Global Excellence & Sustainable Wellness.</span>
           </p>
         </motion.div>
       </div>
