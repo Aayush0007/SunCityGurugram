@@ -109,7 +109,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
       // 5. WhatsApp Redirection
       const clientNumber = "919211522011";
-      const message = `Hi, I am interested in Suncity Monarch.%0A%0A*Lead Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0APlease share the brochure and price list.`;
+      const message = `Hi, I am interested in the Luxury Residential Portfolio on livingluxura.com.%0A%0A* Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0A*Project Interest:*%0A- Suncity Monarch (Sector 78)%0A- Emaar Serenity Hills (Sector 86)%0A- Conscient Elaira / Ashiana Aaroham (Sector 80)%0A%0APlease share the master brochure, price list, and details regarding the ₹16 Lakh launch benefits.`;
       
       const whatsappUrl = `https://wa.me/${clientNumber}?text=${message}`;
       
