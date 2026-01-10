@@ -7,7 +7,16 @@ import vd1 from '../Assets/VD1.mp4';
 import vd2 from '../Assets/VD2.mp4';
 
 const galleryItems = [
-  // FEATURED: New Serenity Hills Walkthrough (YouTube Link Support)
+  // FEATURED: Godrej SORA Lake & Sky Visual
+  { 
+    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80", 
+    alt: "Godrej SORA | Where the Lake Meets the Sky | Sector 53", 
+    category: "View", 
+    type: "image", 
+    featured: true 
+  },
+
+  // FEATURED: New Serenity Hills Walkthrough
   { 
     src: "https://youtu.be/WYWZvjNQ16w", 
     alt: "Serenity Hills | Official Walkthrough | Emaar India", 
@@ -16,39 +25,49 @@ const galleryItems = [
     featured: true 
   },
 
-  // FEATURED: Ashiana Aaroham Masterplan
-  { 
-    src: "https://propertyingurugrams.com/wp-content/uploads/2025/12/Suncity-Monarch-Sector-78-Gurgaon.webp", 
-    alt: "Ashiana Aaroham Site Map & Masterplan [cite: 13]", 
-    category: "Masterplan", 
-    type: "image", 
-    featured: true 
-  },
-
-  // Local Video Items
-  { src: vd1, alt: "Suncity Monarch Cinematic Tour", category: "Video", type: "video", featured: false },
-  { src: vd2, alt: "Lifestyle & Sports Arena Walkthrough", category: "Video", type: "video", featured: false },
-  
-  // Floor Plans & Internal Layouts
+  // NEW: Godrej SORA Unit Layouts
   { 
     src: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg", 
-    alt: "4 BHK + 4 Toilet (Type-1) 1521 sqft Layout [cite: 289, 292]", 
-    category: "Floor Plan", 
-    type: "image", 
-    featured: true 
-  },
-  { 
-    src: "https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon-1024x645.png", 
-    alt: "3 BHK + 3 Toilet (Type-3) 1259 sqft Layout [cite: 327, 330]", 
+    alt: "4 BHK XL (Type 2) 3971 sqft Layout | Wellness Themed", 
     category: "Floor Plan", 
     type: "image", 
     featured: false 
   },
 
-  // Lifestyle & Amenities
-  { src: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg", alt: "75,000 Sq. Ft. Designer Clubhouse", category: "Clubhouse", type: "image", featured: false },
-  { src: "https://img.staticmb.com/mbcontent/images/crop/uploads/2025/8/Landmark-Skyvue-Sector-103_600_900.jpg.webp", alt: "Infinity Edge Pool & Kids Pool [cite: 98]", category: "Amenities", type: "image", featured: false },
-  { src: "https://www.affordablehomesgurgaon.in/wp-content/uploads/2023/01/M3M-Antalya-Hills-Multiple-Courts-1024x576.jpg", alt: "International Standard Sports Arena [cite: 30]", category: "Sports", type: "image", featured: false },
+  // Local Video Items
+  { src: vd1, alt: "Suncity Monarch Cinematic Tour", category: "Video", type: "video", featured: false },
+  
+  // Existing Portfolio Masterplans & Layouts
+  { 
+    src: "https://propertyingurugrams.com/wp-content/uploads/2025/12/Suncity-Monarch-Sector-78-Gurgaon.webp", 
+    alt: "Ashiana Aaroham Site Map & Masterplan", 
+    category: "Masterplan", 
+    type: "image", 
+    featured: true 
+  },
+  { 
+    src: "https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon-1024x645.png", 
+    alt: "3 BHK Premium 2771 sqft Layout | Japanese-Inspired Interiors", 
+    category: "Floor Plan", 
+    type: "image", 
+    featured: false 
+  },
+
+  // Lifestyle & Amenities Showcase
+  { 
+    src: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg", 
+    alt: "75,000 Sq. Ft. Designer Clubhouse | Sector 53 & 80 Collection", 
+    category: "Clubhouse", 
+    type: "image", 
+    featured: true 
+  },
+  { 
+    src: "https://img.staticmb.com/mbcontent/images/crop/uploads/2025/8/Landmark-Skyvue-Sector-103_600_900.jpg.webp", 
+    alt: "Cherry Blossom Native Flora & Sunken Seating", 
+    category: "Wellness", 
+    type: "image", 
+    featured: false 
+  },
 ];
 
 export default function Gallery() {
@@ -68,8 +87,8 @@ export default function Gallery() {
           <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6">
             A Glimpse of <span className="italic text-emerald-700">Perfection</span>
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-            Explore the curated Kid-Centric residences at Aaroham and the sustainable IGBC Platinum community at Serenity Hills.
+          <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+            Explore the Japanese-inspired Shibui life at Godrej SORA and the sustainable IGBC Platinum community at Serenity Hills.
           </p>
         </div>
 
@@ -101,7 +120,7 @@ export default function Gallery() {
                   <img 
                     src="https://img.youtube.com/vi/WYWZvjNQ16w/maxresdefault.jpg" 
                     className="absolute inset-0 w-full h-full object-cover opacity-50"
-                    alt="Video Thumbnail"
+                    alt="Serenity Hills Video Thumbnail"
                   />
                   <a 
                     href={item.src} 

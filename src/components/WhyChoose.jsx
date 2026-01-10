@@ -1,7 +1,14 @@
 import { motion } from 'framer-motion';
-import { Trees, ShieldCheck, Trophy, Home, MapPin, Sparkles, Leaf, ArrowUpRight } from 'lucide-react';
+import { Trees, ShieldCheck, Trophy, Home, MapPin, Sparkles, Leaf, ArrowUpRight, Flower2 } from 'lucide-react';
 
 const reasons = [
+  {
+    icon: <Flower2 className="w-8 h-8 text-pink-600" />,
+    title: "Shibui Wellness Philosophy",
+    desc: "Experience Godrej SORA’s Japanese-inspired aesthetic valuing subtle beauty and peace, featuring a unique Torii gate themed facade[cite: 402, 403, 426].",
+    img: "https://images.unsplash.com/photo-1582192732881-43b7462bc440?auto=format&fit=crop&q=80",
+    category: "Wellness Heritage"
+  },
   {
     icon: <Leaf className="w-8 h-8 text-emerald-600" />,
     title: "Platinum Green Living",
@@ -18,29 +25,22 @@ const reasons = [
   },
   {
     icon: <Home className="w-8 h-8 text-blue-600" />,
-    title: "Master-Planned Privacy",
-    desc: "Low-density architectural mastery featuring 34-floor high-rise towers and expansive 75,000 sq. ft. clubhouses.",
+    title: "Elite Limited Edition",
+    desc: "Exclusivity defined by Godrej SORA with just 2 units per core and total 244 residences overlooking Wazirabad Lake[cite: 561, 573, 628].",
     img: "https://assets.savills.com/properties/IN3101053305/Trump-Tower-Gurgaon-Front-View-livingroom2-1024x724_l_gal.jpg",
     category: "Architecture"
   },
   {
     icon: <Sparkles className="w-8 h-8 text-emerald-600" />,
-    title: "Exclusive Launch Perks",
-    desc: "Unlock inaugural benefits up to ₹16 Lakhs at Aaroham with entry pricing from ₹2.98 Cr for premium residences.",
+    title: "Golf Course Road Access",
+    desc: "Discover premium living at Sector 53, situated just steps away from Golf Course Road with dual sunrise and sunset views[cite: 323, 456, 627].",
     img: "https://www.commercialdesignindia.com/cloud/2025/08/26/6mO1ncrX-24-12-17-IAAD-ELIVATE-%C2%A9-NOUGHTS-AND-CROSSES-001-1200x800.jpg",
     category: "Investment"
   },
   {
-    icon: <MapPin className="w-8 h-8 text-indigo-600" />,
-    title: "Prime Growth Corridor",
-    desc: "Strategic placement in Sectors 80-86 near NH-48 and Karma Lakelands for seamless NCR connectivity.",
-    img: "https://img.staticmb.com/mbcontent/images/crop/uploads/2023/2/Southern-Peripheral-Road-Map_0_1200.jpg.webp",
-    category: "Connectivity"
-  },
-  {
     icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
     title: "RERA Certified Trust",
-    desc: "Fully compliant portfolio (HRERA 993/994 of 2025) ensuring transparent delivery by Emaar, Conscient, and Ashiana.",
+    desc: "Fully compliant portfolio including Godrej SORA (HRERA 976/708/2025/79) ensuring transparent delivery by India's top developers[cite: 7, 168].",
     img: "https://www.mvn.in/uploads/blog/1756198427957.webp",
     category: "Compliance"
   },

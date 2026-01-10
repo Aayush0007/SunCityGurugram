@@ -31,18 +31,18 @@ export default function Hero({ openPopup }) {
   const highlights = [
     {
       icon: <Home className="w-8 h-8 text-emerald-400" />,
-      title: "Premium Living",
-      desc: "Low-density ultra-luxury residences in prime corridors.",
+      title: "Godrej SORA",
+      desc: "Japanese-inspired Shibui wellness on Golf Course Road.",
     },
     {
       icon: <Trophy className="w-8 h-8 text-amber-400" />,
-      title: "Elite Amenities",
-      desc: "Up to 3.5 Lakh Sq. Ft. world-class sports & club ecosystems.",
+      title: "Ultra-Luxury Range",
+      desc: "Exclusive 3 & 4 BHK residences up to 3,971 Sq. Ft.",
     },
     {
       icon: <Trees className="w-8 h-8 text-emerald-400" />,
-      title: "Nature & Wellness",
-      desc: "Over 20 acres of open green spaces and waterfront trails.",
+      title: "Nature & Views",
+      desc: "Stunning Lake views and Cherry Blossom inspired flora.",
     },
   ];
 
@@ -73,20 +73,20 @@ export default function Hero({ openPopup }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-[0.2em] mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-6"
             >
-              <Sparkles className="w-4 h-4" /> Emaar | Conscient | Ashiana
+              <Sparkles className="w-4 h-4" /> Godrej | Emaar | Conscient | Ashiana
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6">
-              The Finest in <span className="text-emerald-400">Gurugram</span>
-              <span className="block text-3xl md:text-4xl mt-4 font-sans font-light tracking-tight text-slate-300">
-                Curated Luxury for Discerning Families
+            <h1 className="text-4xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6">
+              The Finest in <span className="text-emerald-400 italic">Gurugram</span>
+              <span className="block text-2xl md:text-4xl mt-4 font-sans font-light tracking-tight text-slate-300 leading-tight">
+                Wellness-Themed Residences <br className="hidden md:block"/> at Sector 53, Golf Course Road
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-xl leading-relaxed">
-              Explore ultra-luxury 3 & 4 BHK residences starting at ₹2.98 Cr* in Gurgaon's most coveted sectors.
+            <p className="text-base md:text-xl text-slate-400 mb-10 max-w-xl leading-relaxed">
+              Explore ultra-luxury living starting from ₹2.98 Cr* to ₹13.80 Cr* in Gurgaon's most coveted sectors.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -95,7 +95,7 @@ export default function Hero({ openPopup }) {
                   trackEvent({
                     action: "cta_click",
                     category: "engagement",
-                    label: "hero_download_price_list",
+                    label: "hero_download_portfolio",
                   });
                   openPopup();
                 }}
@@ -107,7 +107,7 @@ export default function Hero({ openPopup }) {
                 onClick={openPopup}
                 className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-xl font-bold transition-all"
               >
-                Request Site Visit
+                Request Private Viewing
               </button>
             </div>
 
@@ -143,11 +143,11 @@ export default function Hero({ openPopup }) {
             <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">
                 Priority Access
               </h3>
-              <p className="text-slate-500 text-sm mb-8">
-                Register for exclusive launch benefits up to ₹16 Lakhs* across our luxury portfolio.
+              <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+                Register for Godrej SORA (Sector 53) and get exclusive launch benefits and floor plans.
               </p>
 
               <form onSubmit={handleQuickLead} className="space-y-4">
@@ -170,7 +170,7 @@ export default function Hero({ openPopup }) {
                   type="submit"
                   className="w-full bg-slate-900 hover:bg-black text-white py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl shadow-slate-200"
                 >
-                  <Download className="w-5 h-5" /> Get Portfolio Access
+                  <Download className="w-5 h-5" /> Get Price List
                 </button>
               </form>
 
@@ -182,7 +182,7 @@ export default function Hero({ openPopup }) {
                       className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden"
                     >
                       <img
-                        src={`https://i.pravatar.cc/100?img=${i + 15}`}
+                        src={`https://i.pravatar.cc/100?img=${i + 22}`}
                         alt="Interested Buyer"
                       />
                     </div>
@@ -190,22 +190,22 @@ export default function Hero({ openPopup }) {
                 </div>
                 <p className="text-[11px] text-slate-400 leading-tight">
                   <span className="text-emerald-600 font-bold">
-                    Join 500+ Families
+                    Join 1100+ Individuals
                   </span>{" "}
-                  interested in Gurugram's <br /> greenest communities.
+                  exploring <br /> Gurgaon's Shibui-inspired living.
                 </p>
               </div>
 
               <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-slate-400 uppercase tracking-widest font-bold">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" /> HRERA Registered
+                <ShieldCheck className="w-4 h-4 text-emerald-500" /> HRERA Registered: 976/708/2025/79
               </div>
             </div>
 
             <div className="absolute -bottom-6 -right-6 bg-amber-400 text-slate-900 p-4 rounded-2xl shadow-xl font-bold text-center rotate-3 hidden md:block">
               <p className="text-[10px] uppercase tracking-tighter">
-                Limited Period
+                Sector 53
               </p>
-              <p className="text-xl leading-none italic">Exclusive Launch Benefits</p>
+              <p className="text-xl leading-none italic">New Tower Launch</p>
             </div>
           </motion.div>
         </div>

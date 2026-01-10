@@ -38,11 +38,11 @@ export default function Navbar({ openPopup }) {
   };
 
   const menuItems = [
-    { name: "Portfolio", id: "overview" }, // Renamed from Overview for a multi-project feel
-    { name: "Residences", id: "units" },    // Renamed to cover 3 & 4 BHK across brands
+    { name: "Portfolio", id: "overview" }, 
+    { name: "Residences", id: "units" },    
     { name: "Amenities", id: "amenities" },
     { name: "Pricing", id: "pricing" },
-    { name: "Connectivity", id: "location" }, // Optimized for SEO/Real Estate intent
+    { name: "Connectivity", id: "location" }, 
     { name: "Enquire", id: "contact" },
   ];
 
@@ -75,11 +75,11 @@ export default function Navbar({ openPopup }) {
                 Living Luxura
               </span>
               <span
-                className={`text-[8px] uppercase tracking-[0.3em] font-bold mt-1 transition-colors duration-300 ${
+                className={`text-[7px] md:text-[8px] uppercase tracking-[0.2em] font-bold mt-1 transition-colors duration-300 ${
                   isScrolled ? "text-emerald-600" : "text-emerald-400"
                 }`}
               >
-                Emaar | Conscient | Ashiana
+                Godrej | Emaar | Conscient | Ashiana
               </span>
             </div>
           </motion.div>
@@ -104,7 +104,7 @@ export default function Navbar({ openPopup }) {
                 trackEvent({
                   action: "cta_click",
                   category: "engagement",
-                  label: "navbar_enquire_now",
+                  label: "navbar_priority_booking",
                 });
                 openPopup();
               }}
@@ -170,7 +170,7 @@ export default function Navbar({ openPopup }) {
                 }}
                 className="mt-6 bg-emerald-600 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl"
               >
-                Contact Luxury Expert
+                Request Private Viewing
               </motion.button>
             </div>
 

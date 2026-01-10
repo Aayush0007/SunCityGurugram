@@ -4,6 +4,13 @@ import { motion } from 'framer-motion';
 export default function DeveloperTrust() {
   const developers = [
     {
+      name: "Godrej Properties",
+      heritage: "Since 1897",
+      focus: "Wellness & Innovation",
+      desc: "A 128-year legacy of trust, delivering Japanese-inspired Shibui wellness residences at Godrej SORA.",
+      accent: "text-red-600"
+    },
+    {
       name: "Suncity Projects",
       heritage: "Since 1996",
       focus: "Luxury Townships",
@@ -28,7 +35,7 @@ export default function DeveloperTrust() {
       name: "Ashiana Housing",
       heritage: "Kid-Centric Experts",
       focus: "Family Wellness",
-      desc: "India's leader in curated Kid-Centric Residences designed to nurture growth and creativity[cite: 5, 6, 10].",
+      desc: "India's leader in curated Kid-Centric Residences designed to nurture growth and creativity.",
       accent: "text-indigo-600"
     }
   ];
@@ -37,21 +44,21 @@ export default function DeveloperTrust() {
     {
       icon: <Award className="w-10 h-10 text-amber-600" />,
       title: "Platinum Pre-Certified",
-      desc: "Sustainability-focused developments including Serenity Hills' IGBC Platinum Pre-Certification for green living.",
+      desc: "Sustainability-focused developments including Godrej SORA and Serenity Hills' IGBC Platinum Pre-Certifications.",
       color: "from-amber-50 to-yellow-50",
       border: "border-amber-200",
     },
     {
       icon: <Globe className="w-10 h-10 text-emerald-600" />,
       title: "Global Design Partners",
-      desc: "Collaborating with world-renowned consultants like Benoy (Hong Kong) and Hearth Education Advisors.",
+      desc: "Collaborating with world-renowned consultants like Benoy (Hong Kong) and Japanese design philosophies.",
       color: "from-emerald-50 to-teal-50",
       border: "border-emerald-200",
     },
     {
       icon: <Shield className="w-10 h-10 text-blue-600" />,
       title: "H-RERA Certified Portfolio",
-      desc: "Full transparency with RERA-registered phases, ensuring complete safety and peace of mind for every investor.",
+      desc: "Full transparency with RERA-registered phases (976/708/2025/79), ensuring complete safety for every investor.",
       color: "from-blue-50 to-indigo-50",
       border: "border-blue-200",
     },
@@ -70,30 +77,30 @@ export default function DeveloperTrust() {
           className="text-center mb-20"
         >
           <span className="text-xs uppercase tracking-[0.6em] text-emerald-600 font-bold mb-4 block">The Pillars of Excellence</span>
-          <h2 className="text-5xl md:text-7xl font-bold font-serif text-gray-900 mb-8 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-bold font-serif text-gray-900 mb-8 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
             Global Masters. <span className="italic text-emerald-700">Trusted Legacies.</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             Living Luxura curates Gurugram's most prestigious residential enclaves, developed by industry leaders 
-            recognized for their IGBC pre-certified sustainability and architectural innovation.
+            recognized for their sustainable innovation and 100+ years of collective trust.
           </p>
         </motion.div>
 
-        {/* Brand Showcase Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+        {/* Brand Showcase Grid - Updated to 5 columns for desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-24">
           {developers.map((dev, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="group p-8 bg-white rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-500"
+              className="group p-6 bg-white rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-500"
             >
-              <Building2 className={`w-8 h-8 mb-6 ${dev.accent}`} />
-              <h4 className="font-serif font-bold text-slate-900 text-2xl mb-1">{dev.name}</h4>
-              <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mb-4">{dev.heritage}</p>
-              <div className="h-px w-12 bg-slate-100 mb-4 group-hover:w-full transition-all duration-500" />
-              <p className="text-sm text-slate-500 leading-relaxed">{dev.desc}</p>
+              <Building2 className={`w-6 h-6 mb-4 ${dev.accent}`} />
+              <h4 className="font-serif font-bold text-slate-900 text-lg mb-1 leading-tight">{dev.name}</h4>
+              <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest mb-3">{dev.heritage}</p>
+              <div className="h-px w-8 bg-slate-100 mb-3 group-hover:w-full transition-all duration-500" />
+              <p className="text-[11px] text-slate-500 leading-relaxed">{dev.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -133,11 +140,11 @@ export default function DeveloperTrust() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-full mb-8">
             <Shield className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold uppercase tracking-widest">RERA Compliant Development Portfolio</span>
+            <span className="text-xs font-bold uppercase tracking-widest">HRERA Registered Portfolio</span>
           </div>
-          <p className="text-3xl md:text-4xl italic text-slate-800 font-serif leading-snug">
-            "We don't just build residences; we secure <br className="hidden md:block" />
-            <span className="text-emerald-700 font-bold not-italic">legacies of trust and timeless value.</span>"
+          <p className="text-2xl md:text-4xl italic text-slate-800 font-serif leading-snug">
+            "A century of trust, <br className="hidden md:block" />
+            <span className="text-emerald-700 font-bold not-italic">securing legacies for generations.</span>"
           </p>
         </motion.div>
       </div>

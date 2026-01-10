@@ -22,10 +22,10 @@ export default function FinalCTA({ openPopup }) {
             <Sparkles className="w-12 h-12 text-white" />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-serif mb-8 bg-gradient-to-r from-white to-emerald-200 bg-clip-text text-transparent leading-tight">
-            Secure Your Elite Address <br className="hidden md:block" /> in Gurugram's Luxury Corridor
+            The Pinnacle of Gurugram <br className="hidden md:block" /> Real Estate Awaits
           </h2>
           <p className="text-xl md:text-2xl text-emerald-100 max-w-4xl mx-auto leading-relaxed">
-            Exclusive launch benefits up to ₹16 Lakhs* available for Serenity Hills, Elaira Residences, and Aaroham. Secure priority selection across Sectors 80-86 with our pre-launch inaugural offers.
+            From the wellness-themed Shibui life at <strong>Godrej SORA</strong> to the eco-luxe sanctuaries of <strong>Serenity Hills</strong>. Secure your place in the sun across Golf Course Road and the New Alpha Corridor.
           </p>
         </motion.div>
 
@@ -42,7 +42,7 @@ export default function FinalCTA({ openPopup }) {
             className="group w-full lg:w-auto bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
           >
             <Phone className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            Speak to a Property Expert
+            Consult a Portfolio Expert
           </button>
 
           <button 
@@ -50,7 +50,7 @@ export default function FinalCTA({ openPopup }) {
             className="group w-full lg:w-auto bg-white text-slate-900 font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-white/20 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
           >
             <Download className="w-6 h-6 group-hover:scale-110 transition-transform text-emerald-600" />
-            Download Portfolio Brochure
+            Download Digital Brochure
           </button>
 
           <button 
@@ -58,7 +58,7 @@ export default function FinalCTA({ openPopup }) {
             className="group w-full lg:w-auto bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-lg px-8 py-5 rounded-2xl shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 flex items-center justify-center gap-4 active:scale-95"
           >
             <Calendar className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            Schedule VIP Site Visit
+            Request Private Site Visit
           </button>
         </motion.div>
 
@@ -71,15 +71,15 @@ export default function FinalCTA({ openPopup }) {
           className="text-center mt-16"
         >
           <p className="text-lg italic text-emerald-200">
-            Limited inventory release — Act now to leverage curated kid-centric designs and IGBC Platinum sustainable living.
+            Limited inventory release at Sector 53 — Exclusive 4 BHK residences starting at ₹11.26 Cr onwards.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8 opacity-70">
             <div className="flex items-center gap-2 text-sm text-gray-300">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" /> Fully H-RERA Compliant Portfolio
+              <ShieldCheck className="w-4 h-4 text-emerald-400" /> HRERA No: 976/708/2025/79
             </div>
             <div className="hidden md:block w-1 h-1 bg-gray-500 rounded-full" />
             <div className="text-sm text-gray-300">
-              Registration Amount: ₹11,00,000/- for Priority Access
+              Registration Amount: ₹11,00,000/- for Priority Allotment
             </div>
           </div>
         </motion.div>

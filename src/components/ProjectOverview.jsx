@@ -5,36 +5,37 @@ import Home from 'lucide-react/dist/esm/icons/home';
 import Trophy from 'lucide-react/dist/esm/icons/trophy';
 import MapPin from 'lucide-react/dist/esm/icons/map-pin';
 import Ruler from 'lucide-react/dist/esm/icons/ruler';
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
 
 export default function ProjectOverview() {
-  // Aggregate stats from the new property details
+  // Aggregate stats including Godrej SORA and existing portfolio
   const stats = [
-    { label: "Total Green Area", value: "25+ Acres" }, // Serenity Hills
-    { label: "Central Greens", value: "8 Acres" },    // Serenity Hills
-    { label: "Open Space", value: "90%" },           // Ashiana Aaroham & Serenity Hills [cite: 27, 109]
-    { label: "Planned Units", value: "500+" },        // Elaira Residences
+    { label: "Portfolio Scale", value: "35+ Acres" }, 
+    { label: "Design Philosophy", value: "Shibui" },    // Godrej SORA Shibui Philosophy
+    { label: "Max Unit Size", value: "3,971 SqFt" },   // Godrej SORA 4BHK XL
+    { label: "Certification", value: "Platinum" },     // IGBC Platinum
   ];
 
   const highlights = [
     {
+      icon: <Sparkles className="w-8 h-8 text-emerald-600" />,
+      title: "Godrej SORA: Shibui Life",
+      desc: "A Japanese-inspired sanctuary at Sector 53 featuring cherry blossom native flora and stunning lake views.",
+    },
+    {
       icon: <Trees className="w-8 h-8 text-emerald-600" />,
-      title: "Eco-Luxe Sanctuary",
-      desc: "Experience Serenity Hills' landmark green community with 20+ acres of open spaces and a tranquil waterfront promenade.",
+      title: "Eco-Luxe Sanctuaries",
+      desc: "Serenity Hills' landmark green community with 20+ acres of open spaces and a tranquil waterfront promenade.",
     },
     {
       icon: <Trophy className="w-8 h-8 text-amber-600" />,
-      title: "Pro-Sports Arena",
-      desc: "India's premier Kid-Centric Residences at Ashiana Aaroham, featuring international standard facilities like Pickleball, Football, and Tennis.",
+      title: "Elite Sports & Wellness",
+      desc: "Professional sports academies at Ashiana Aaroham and wellness-themed residences at Godrej SORA.",
     },
     {
       icon: <Home className="w-8 h-8 text-blue-600" />,
-      title: "Benoy-Designed Living",
-      desc: "Architectural excellence at Elaira Residences, designed by global masters Benoy, Hong Kong, featuring 34-floor high-rise towers.",
-    },
-    {
-      icon: <Ruler className="w-8 h-8 text-emerald-600" />,
-      title: "Premier Clubhouses",
-      desc: "Massive clubhouses ranging up to 75,000 sq. ft., offering world-class leisure at both Elaira and Serenity Hills.",
+      title: "Global Architecture",
+      desc: "Designed by global masters Benoy (HK) at Elaira and inspired by minimalist elegance at Golf Course Road.",
     },
   ];
 
@@ -50,9 +51,9 @@ export default function ProjectOverview() {
             viewport={{ once: true }}
             className="max-w-3xl"
           >
-            <h2 className="text-sm uppercase tracking-[0.4em] text-emerald-600 font-bold mb-4">A Curated Luxury Portfolio</h2>
+            <h2 className="text-sm uppercase tracking-[0.4em] text-emerald-600 font-bold mb-4">The Pinnacle Portfolio</h2>
             <h3 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 leading-tight">
-              Gurugram's <span className="italic text-emerald-700">Most Coveted</span> Residential Enclaves
+              Where the <span className="italic text-emerald-700">Lake Meets the Sky</span>
             </h3>
           </motion.div>
           <motion.div 
@@ -62,7 +63,7 @@ export default function ProjectOverview() {
             className="lg:max-w-sm"
           >
             <p className="text-slate-500 leading-relaxed border-l-2 border-emerald-500 pl-6">
-              Strategically located across Sectors 78, 80, and 86, our projects—Suncity Monarch, Serenity Hills, and Elaira—redefine low-density luxury living.
+              Expanding our horizon to <strong>Sector 53, Golf Course Road</strong>. Our curated collection now spans Gurugram's most elite corridors.
             </p>
           </motion.div>
         </div>
@@ -88,14 +89,16 @@ export default function ProjectOverview() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="lg:col-span-8 h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group"
+            className="lg:col-span-8 h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group relative"
           >
-            {/* SEO optimized alt text for the main aerial image */}
             <img 
               src="https://megarealtymax.com/wp-admin/uploads/property/aipl-lake-city-luxury-apartments-gurugram-waterfront-towers.webp" 
-              alt="Aerial view of low-density luxury towers in Gurugram featuring Serenity Hills and Elaira Residences" 
+              alt="Godrej SORA Sector 53 featuring lake views and Japanese-inspired architecture" 
               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
             />
+            <div className="absolute top-6 left-6 bg-slate-900/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+              <p className="text-white text-[10px] font-bold uppercase tracking-widest">Golf Course Road Collection</p>
+            </div>
           </motion.div>
           <div className="lg:col-span-4 grid grid-rows-2 gap-8">
             <motion.div 
@@ -104,18 +107,18 @@ export default function ProjectOverview() {
               viewport={{ once: true }}
               className="rounded-3xl overflow-hidden shadow-xl"
             >
-              <img src="https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon.png" alt="Ultra-luxury 3 and 4 BHK interiors at Suncity Monarch and Serenity Hills" className="w-full h-full object-cover" />
+              <img src="https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon.png" alt="Wellness-themed interiors at Godrej SORA and Serenity Hills" className="w-full h-full object-cover" />
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="rounded-3xl overflow-hidden shadow-xl bg-emerald-900 flex flex-col justify-center p-8 text-white"
+              className="rounded-3xl overflow-hidden shadow-xl bg-slate-900 flex flex-col justify-center p-8 text-white"
             >
               <MapPin className="w-10 h-10 text-emerald-400 mb-4" />
-              <h4 className="text-2xl font-bold mb-2">Prime Connectivity</h4>
-              <p className="text-emerald-100/70 text-sm">Strategic placement in Gurugram's growth corridors (Sectors 78, 80 & 86) offers direct access to NH-8, SPR, and key business hubs.</p>
+              <h4 className="text-2xl font-bold mb-2">Sector 53 Legacy</h4>
+              <p className="text-slate-300 text-sm">Godrej SORA occupies plot no. GH-21, Village Wazirabad, offering the ultimate address on Golf Course Road.</p>
             </motion.div>
           </div>
         </div>

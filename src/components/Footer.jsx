@@ -22,7 +22,7 @@ export default function Footer() {
               <h3 className="text-2xl font-serif font-bold tracking-tight">Living Luxura</h3>
             </div>
             <p className="text-slate-400 leading-relaxed max-w-md mb-8 text-sm">
-              Curating Gurugram's finest residential masterpieces. From the sustainable greens of <strong>Serenity Hills (Emaar)</strong> to the global design of <strong>Elaira (Conscient)</strong> and kid-centric wellness at <strong>Aaroham (Ashiana)</strong>.
+              Curating Gurugram's finest residential masterpieces. From the wellness-inspired <strong>Godrej SORA (Sector 53)</strong> to the sustainable greens of <strong>Serenity Hills (Emaar)</strong>, the global design of <strong>Elaira (Conscient)</strong>, and <strong>Aaroham (Ashiana)</strong>.
             </p>
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 text-emerald-500 font-bold text-[10px] uppercase tracking-widest">
@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest">
                 <Globe className="w-4 h-4" />
-                Sectors 78, 80 & 86, Gurugram
+                Sectors 53, 78, 80 & 86, Gurugram
               </div>
             </div>
           </div>
@@ -56,8 +56,8 @@ export default function Footer() {
                 <div>
                   <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Visit Us</p>
                   <p className="text-white font-medium text-sm leading-relaxed">
-                    Sector 78, Naurangpur,<br />
-                    Gurugram, HR
+                    Sector 53, Golf Course Road /<br />
+                    Sector 78, Naurangpur, Gurugram
                   </p>
                 </div>
               </div>
@@ -82,10 +82,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <div className="space-y-4">
               <p className="text-[10px] text-slate-600 leading-relaxed italic uppercase tracking-tighter">
-                RERA IDs: RC/REP/HARERA/GGM/993/725/2025/96 | RC/REP/HARERA/GGM/917/649/2025/20 | 117 of 2025.
+                RERA IDs: RC/REP/HARERA/GGM/976/708/2025/79 | RC/REP/HARERA/GGM/993/725/2025/96 | RC/REP/HARERA/GGM/917/649/2025/20 | 117 of 2025.
               </p>
               <p className="text-[10px] text-slate-600 leading-relaxed italic">
-                Disclaimer: The information on this website is for informational purposes only. "Living Luxura" acts as a marketing partner for Emaar India, Conscient, and Ashiana Housing. All artistic impressions and layouts are subject to change as per approved plans.
+                Disclaimer: The information on this website is for informational purposes only. "Living Luxura" acts as a marketing partner for Godrej Properties, Emaar India, Conscient, and Ashiana Housing. All artistic impressions and layouts are subject to change as per approved plans.
               </p>
             </div>
             <div className="md:text-right">
