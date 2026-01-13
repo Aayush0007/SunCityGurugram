@@ -62,7 +62,7 @@ function App() {
         }
         return prev;
       });
-    }, 5000);
+    }, 10000);
 
     return () => {
       window.removeEventListener("hashchange", checkHash);
