@@ -5,18 +5,17 @@ import Download from 'lucide-react/dist/esm/icons/download';
 import ShieldCheck from 'lucide-react/dist/esm/icons/shield-check';
 
 export default function Pricing({ openPopup }) {
-  // Organized pricing data across the luxury portfolio
   const portfolioPricing = [
     {
       label: "Premium Collection",
       price: "₹2.98 Cr*",
-      desc: "Serenity Hills & Elaira Residences",
+      desc: "Serenity Hills & Elaira Residences (3 BHK)",
     },
-    {
-      label: "Wellness Collection",
-      price: "₹8.86 Cr*",
-      desc: "Godrej SORA Sector 53 (Golf Course Rd)",
-    },
+    // {
+    //   label: "Wellness Collection",
+    //   price: "₹8.86 Cr*",
+    //   desc: "Godrej SORA Sector 53 (Golf Course Rd)",
+    // },
   ];
 
   const godrejMilestones = [
@@ -53,7 +52,6 @@ export default function Pricing({ openPopup }) {
         </div>
 
         <div className="max-w-5xl mx-auto">
-          {/* Godrej SORA Premium Pricing Card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }} 
             whileInView={{ opacity: 1, scale: 1 }} 
@@ -69,16 +67,14 @@ export default function Pricing({ openPopup }) {
                   Wellness Themed • Golf Course Road
                 </p>
                 <div className="space-y-4 mb-8">
-                   {[
-                     { type: "3 BHK (2771 SqFt)", range: "₹8.86 - 9.63 Cr*" },
-                     { type: "4 BHK L (3519 SqFt)", range: "₹11.26 - 12.23 Cr*" },
-                     { type: "4 BHK XL (3971 SqFt)", range: "₹12.70 - 13.80 Cr*" }
-                   ].map((item, i) => (
-                     <div key={i} className="flex justify-between items-center border-b border-white/10 pb-2">
-                       <span className="text-sm text-slate-300 font-medium">{item.type}</span>
-                       <span className="text-sm text-white font-bold">{item.range}</span>
-                     </div>
-                   ))}
+                   <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                     <span className="text-sm text-slate-300 font-medium">3 BHK Premium (2771 SqFt)</span>
+                     {/* <span className="text-sm text-white font-bold">₹8.86 - 9.63 Cr*</span> */}
+                   </div>
+                   <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                     <span className="text-sm text-slate-300 font-medium">Large & XL Typologies</span>
+                     <span className="text-sm text-white font-bold text-xs">Request Pricing</span>
+                   </div>
                 </div>
               </div>
               
@@ -98,13 +94,11 @@ export default function Pricing({ openPopup }) {
             </div>
           </motion.div>
 
-          {/* Detailed Payment Plan Structure */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 p-8 bg-slate-50 rounded-[2rem] border border-slate-100">
                <h4 className="text-xl font-serif font-bold text-slate-900 mb-6 flex items-center gap-2">
                  <ShieldCheck className="text-emerald-600" /> Milestone Payment Structure
                </h4>
-               
                <div className="grid grid-cols-2 gap-4">
                   {godrejMilestones.map((m, idx) => (
                     <div key={idx} className="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
@@ -114,7 +108,7 @@ export default function Pricing({ openPopup }) {
                   ))}
                   <div className="col-span-2 p-4 bg-emerald-900 text-white rounded-xl">
                      <p className="text-[10px] opacity-70 font-bold uppercase">Balance Milestones</p>
-                     <p className="text-sm font-medium">Completion of Ground Floor (25%) | OC Application (20%) | Possession (5%)</p>
+                     <p className="text-sm font-medium">Construction Milestones (50%) | OC Application (20%) | Possession (5%)</p>
                   </div>
                </div>
             </div>
@@ -125,7 +119,7 @@ export default function Pricing({ openPopup }) {
                 <div>
                    <p className="text-xs font-bold text-slate-900 mb-1 uppercase">Portfolio Range</p>
                    <p className="text-[11px] text-slate-600 leading-relaxed italic">
-                     Collection spans ₹2.98 Cr to ₹13.80 Cr across Gurugram's elite sectors (53, 80, 86).
+                     Collection focuses on high-end 3 BHK residences across Gurugram's elite sectors.
                    </p>
                 </div>
               </div>
@@ -134,7 +128,7 @@ export default function Pricing({ openPopup }) {
                 <div>
                    <p className="text-xs font-bold mb-1 uppercase">RERA Compliant</p>
                    <p className="text-[11px] text-slate-400 leading-relaxed italic">
-                     Godrej SORA Registered under RC/REP/HARERA/GGM/976/708/2025/79.
+                     Fully registered projects ensuring transparency and timely delivery.
                    </p>
                 </div>
               </div>

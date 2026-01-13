@@ -71,7 +71,7 @@ export default function FinalCTA({ openPopup }) {
           className="text-center mt-16"
         >
           <p className="text-lg italic text-emerald-200">
-            Limited inventory release at Sector 53 — Exclusive 4 BHK residences starting at ₹11.26 Cr onwards.
+            Limited inventory release at Sector 53 — Exclusive 3 BHK residences starting at ₹2.98 Cr onwards.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8 opacity-70">
             <div className="flex items-center gap-2 text-sm text-gray-300">

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import BookOpen from 'lucide-react/dist/esm/icons/book-open';
 import Users from 'lucide-react/dist/esm/icons/users';
 import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
 import Download from 'lucide-react/dist/esm/icons/download';
@@ -8,18 +7,18 @@ import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 export default function UnitConfigurations({ openPopup }) {
   const configurations = [
     {
-      title: "Godrej SORA Wellness",
+      title: "Godrej SORA Premium",
       subtitle: "Sector 53, Golf Course Road",
-      size: "2,771 - 3,971 Sq. Ft.",
+      size: "2,771 Sq. Ft. Onwards",
       desc: "Japanese-inspired 'Shibui' life featuring Torii gate facades, cherry blossom flora, and private lift lobbies.",
       features: ["Private Genkan Lobbies", "50 Ft. Expansive Balconies", "Lake & Sky Views"],
-      price: "Starting @ ₹8.86 Cr*",
+      // price: "Starting @ ₹8.86 Cr*",
       highlight: "New Tower Launch",
       img: "https://omararesidences.in/wp-content/uploads/2025/09/oview-1024x853.jpg",
       featured: true
     },
     {
-      title: "3 BHK Premium",
+      title: "3 BHK Luxury",
       subtitle: "Serenity Hills & Elaira",
       size: "2,045 - 2,350 Sq. Ft.",
       desc: "Architectural excellence by Benoy HK with IGBC Platinum sustainability and wrap-around glass corners.",
@@ -27,17 +26,6 @@ export default function UnitConfigurations({ openPopup }) {
       price: "Starting @ ₹2.98 Cr*",
       highlight: "High Demand",
       img: "https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/2/2025/02/14151503/living-room-interior-in-gurgaon.jpg",
-      featured: true
-    },
-    {
-      title: "4 BHK + Servant",
-      subtitle: "Aaroham & Serenity",
-      size: "1,521 - 3,150 Sq. Ft.",
-      desc: "Elite kid-centric residences featuring HEPA-filtered air and safe, carbon-neutral green ecosystems.",
-      features: ["HEPA Fresh Air", "Kid-Centric Design", "3-Side Open Views"],
-      price: "Starting @ ₹4.08 Cr*",
-      highlight: "Exclusive",
-      img: "https://dalcore.in/wp-content/uploads/2025/09/Inside-falcon-1024x645.png",
       featured: true
     }
   ];
@@ -49,7 +37,7 @@ export default function UnitConfigurations({ openPopup }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-2xl">
             <h2 className="text-sm uppercase tracking-[0.4em] text-emerald-600 font-bold mb-4">The Luxury Collection</h2>
             <h3 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 leading-tight">
-              Elite <span className="italic text-emerald-700">3, 4 & 5 BHK</span> Residences
+              Curated <span className="italic text-emerald-700">3 BHK</span> Residences
             </h3>
           </motion.div>
           <motion.button onClick={openPopup} className="text-slate-900 font-bold flex items-center gap-2 border-b-2 border-emerald-500 pb-1 hover:text-emerald-700 transition-colors">
@@ -57,7 +45,7 @@ export default function UnitConfigurations({ openPopup }) {
           </motion.button>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {configurations.map((unit, idx) => (
             <motion.div 
               key={idx}
@@ -73,7 +61,7 @@ export default function UnitConfigurations({ openPopup }) {
                   alt={`${unit.title} Interior`} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
-                <div className={`absolute top-4 left-4 text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${unit.highlight === "New Tower Launch" ? 'bg-amber-500' : unit.highlight === "High Demand" ? 'bg-emerald-600' : 'bg-slate-800'}`}>
+                <div className={`absolute top-4 left-4 text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${unit.highlight === "New Tower Launch" ? 'bg-amber-500' : 'bg-emerald-600'}`}>
                   {unit.highlight}
                 </div>
               </div>
@@ -104,7 +92,7 @@ export default function UnitConfigurations({ openPopup }) {
                 
                 <div className="mt-auto pt-6">
                   <button onClick={openPopup} className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-emerald-700 transition-colors">
-                    <Download className="w-4 h-4" /> Get {unit.title} Layouts
+                    <Download className="w-4 h-4" /> Get Floor Plans
                   </button>
                 </div>
               </div>
@@ -112,7 +100,6 @@ export default function UnitConfigurations({ openPopup }) {
           ))}
         </div>
 
-        {/* LIMITED INVENTORY ALERT */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }} 
@@ -120,7 +107,7 @@ export default function UnitConfigurations({ openPopup }) {
           className="mt-12 p-8 bg-white rounded-3xl border border-dashed border-emerald-200 text-center shadow-sm"
         >
           <p className="text-sm text-slate-600 font-medium">
-            <span className="text-emerald-600 font-bold uppercase tracking-wider">Strategic Portfolio Alert:</span> From Japanese-inspired sky residences at <span className="font-bold">Sector 53</span> (2,771 - 3,971 sq. ft.) to limited duplex 5BHK configurations at <span className="font-bold">Sector 80</span> (up to 2,613 sq. ft.).
+            <span className="text-emerald-600 font-bold uppercase tracking-wider">Strategic Portfolio Alert:</span> From Japanese-inspired sky residences at <span className="font-bold">Sector 53</span> to premium low-density residences at <span className="font-bold">Sector 80 & 86</span>.
           </p>
         </motion.div>
       </div>

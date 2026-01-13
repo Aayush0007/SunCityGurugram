@@ -37,7 +37,7 @@ export default function Hero({ openPopup }) {
     {
       icon: <Trophy className="w-8 h-8 text-amber-400" />,
       title: "Ultra-Luxury Range",
-      desc: "Exclusive 3 & 4 BHK residences up to 3,971 Sq. Ft.",
+      desc: "Exclusive 3 residences up to 3,971 Sq. Ft.",
     },
     {
       icon: <Trees className="w-8 h-8 text-emerald-400" />,
@@ -86,7 +86,7 @@ export default function Hero({ openPopup }) {
             </h1>
 
             <p className="text-base md:text-xl text-slate-400 mb-10 max-w-xl leading-relaxed">
-              Explore ultra-luxury living starting from ₹2.98 Cr* to ₹13.80 Cr* in Gurgaon's most coveted sectors.
+              Explore ultra-luxury living starting from ₹2.98 Cr* in Gurgaon's most coveted sectors.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
