@@ -26,9 +26,16 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    name: "", phone: "", location: "", intent: "", 
-    timeline: "", consent: false
+    name: "", phone: "", location: ""
   });
+
+  const COLORS = {
+    tan: "#B68D40",
+    cream: "#F4F1E1",
+    charcoal: "#121C17",
+    gold: "#D6AD60",
+    white: "#FFFFFF"
+  };
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -37,66 +44,37 @@ export default function ContactForm() {
 
   const handleNext = async () => {
     if (step === 1) {
-      if (!validateName(formData.name)) {
-        return setError("Please enter a valid Name (no numbers or special characters).");
-      }
+      if (!validateName(formData.name)) return setError("Please enter a valid Name.");
       const validPhone = validateIndianMobile(formData.phone);
-      if (!validPhone) {
-        return setError("Please enter a valid 10-digit Indian Mobile Number.");
-        
-      }
+      if (!validPhone) return setError("Please enter a valid 10-digit Mobile Number.");
 
       setLoading(true);
-      const { data, error: fetchError } = await supabase
-        .from("leads")
-        .select("phone")
-        .eq("phone", validPhone)
-        .maybeSingle();
+      const { data } = await supabase.from("leads").select("phone").eq("phone", validPhone).maybeSingle();
       setLoading(false);
-
-      if (data) {
-        return setError("This phone number is already registered. Please use a different number.");
-      }
+      if (data) return setError("This phone number is already registered.");
+      
+      setStep(2);
     }
-
-    if (step === 2) {
-      if (!formData.location) return setError("Please select your current residency.");
-      if (!formData.intent) return setError("Please specify your purchase intent.");
-    }
-    
-    setError("");
-    setStep(prev => prev + 1);
   };
 
-  const handleBack = () => {
-    setError("");
-    setStep(prev => prev - 1);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.timeline) return setError("Please select your planned timeline.");
-    if (!formData.consent) return setError("You must authorize us to provide project details.");
+  const handleSubmit = async () => {
+    if (!formData.location) return setError("Please select your current residency.");
 
     setLoading(true);
     try {
-      // FIX: Removed 'consent' from payload as it's missing in your DB schema leads table
-      // Added 'utm_source' to match your schema requirements
       const { error: dbError } = await supabase.from("leads").insert([{
         name: formData.name.trim(),
         phone: validateIndianMobile(formData.phone),
         location: formData.location,
-        intent: formData.intent,
-        timeline: formData.timeline,
-        utm_source: "contact_section" // Mapping 'source' logic to utm_source
+        intent: "Inquiry", // Default internal value
+        timeline: "Immediate", // Default internal value
+        utm_source: "short_contact_form"
       }]);
 
       if (dbError) throw dbError;
-      
       setSubmitted(true);
-      trackEvent({ action: "form_submit", category: "contact", label: "contact_section" });
+      trackEvent({ action: "form_submit", category: "contact", label: "short_form" });
     } catch (err) {
-      console.error(err);
       setError("System busy. Please try again later.");
     } finally {
       setLoading(false);
@@ -104,148 +82,54 @@ export default function ContactForm() {
   };
 
   return (
-    <div id="contact" className="max-w-2xl mx-auto bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
-      <div className="bg-slate-900 pt-8 pb-6 px-8 text-center text-white relative">
-        <h3 className="text-2xl font-serif font-bold italic">Contact Sales Expert</h3>
-        <p className="text-[10px] text-emerald-400 uppercase tracking-widest mt-1 mb-4">Official Response Desk</p>
-        <div className="w-full bg-slate-800 h-1 rounded-full mt-4">
-            <motion.div 
-                className="bg-emerald-500 h-1 rounded-full"
-                animate={{ width: `${(step / 3) * 100}%` }}
-            />
-        </div>
+    <div id="contact" className="max-w-md mx-auto bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+      <div className="pt-10 pb-8 px-8 text-center" style={{ backgroundColor: COLORS.charcoal }}>
+        <h3 className="text-2xl font-serif font-bold italic text-white">Contact Us</h3>
+        <p className="text-[10px] uppercase tracking-[0.4em] mt-2" style={{ color: COLORS.gold }}>Official Response Desk</p>
       </div>
       
-      <div className="p-8 md:p-12">
+      <div className="p-8 md:p-10">
         <AnimatePresence mode="wait">
           {!submitted ? (
-            <motion.div 
-                key={step} 
-                initial={{ opacity: 0, x: 20 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-            >
-              {error && (
-                <div className="mb-6 p-3 bg-red-50 text-red-600 text-xs rounded-xl border border-red-100 font-bold text-center">
-                  {error}
-                </div>
-              )}
+            <motion.div key={step} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}>
+              {error && <div className="mb-6 p-3 bg-red-50 text-red-700 text-xs rounded-xl border border-red-100 font-bold text-center">{error}</div>}
               
-              {step === 1 && (
-                <div className="space-y-4">
+              {step === 1 ? (
+                <div className="space-y-5">
                   <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase ml-1">Full Name</label>
-                    <input 
-                        type="text" 
-                        placeholder="e.g. Rahul Sharma" 
-                        className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" 
-                        value={formData.name} 
-                        onChange={(e) => handleInputChange("name", e.target.value)} 
-                    />
+                    <label className="text-[10px] font-bold uppercase tracking-widest ml-1 mb-1 block" style={{ color: COLORS.tan }}>Full Name</label>
+                    <input type="text" className="w-full p-4 border-2 rounded-xl outline-none text-sm" style={{ borderColor: COLORS.cream, color: COLORS.charcoal }} value={formData.name} onChange={(e) => handleInputChange("name", e.target.value)} placeholder="Rahul Sharma" />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase ml-1">Mobile Number</label>
-                    <input 
-                        type="tel" 
-                        placeholder="+91 XXXXX XXXXX" 
-                        className="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-emerald-500 transition-all" 
-                        value={formData.phone} 
-                        onChange={(e) => handleInputChange("phone", e.target.value)} 
-                    />
+                    <label className="text-[10px] font-bold uppercase tracking-widest ml-1 mb-1 block" style={{ color: COLORS.tan }}>Mobile Number</label>
+                    <input type="tel" className="w-full p-4 border-2 rounded-xl outline-none text-sm" style={{ borderColor: COLORS.cream, color: COLORS.charcoal }} value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+91 XXXXX XXXXX" />
                   </div>
-                  <button 
-                    disabled={loading}
-                    onClick={handleNext} 
-                    className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all disabled:opacity-50"
-                  >
-                    {loading ? "Verifying..." : "Verify Eligibility"} <ChevronRight className="w-5 h-5" />
+                  <button disabled={loading} onClick={handleNext} className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-xl active:scale-95 text-sm transition-all" style={{ backgroundColor: COLORS.gold, color: COLORS.charcoal }}>
+                    {loading ? "Verifying..." : "Continue"} <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
-              )}
-
-              {step === 2 && (
+              ) : (
                 <div className="space-y-6">
-                  <div>
-                    <p className="text-sm font-bold text-slate-700 mb-3">Current Residency? *</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {["Gurugram", "Outside"].map(l => (
-                        <button 
-                            key={l} 
-                            onClick={() => handleInputChange("location", l)} 
-                            className={`p-4 text-xs border-2 rounded-xl font-bold transition-all ${formData.location === l ? "border-emerald-500 bg-emerald-50 text-emerald-700" : "border-slate-100 text-slate-500 hover:border-slate-200"}`}
-                        >
-                            {l}
-                        </button>
-                      ))}
-                    </div>
+                  <p className="text-xs font-bold uppercase tracking-widest mb-4 text-center" style={{ color: COLORS.tan }}>Current Residency? *</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    {["Gurugram", "Outside"].map(l => (
+                      <button key={l} onClick={() => handleInputChange("location", l)} className={`p-5 text-xs rounded-2xl font-bold transition-all border-2 ${formData.location === l ? "shadow-md" : ""}`} style={{ borderColor: formData.location === l ? COLORS.gold : COLORS.cream, backgroundColor: formData.location === l ? COLORS.cream : COLORS.white, color: COLORS.charcoal }}>{l}</button>
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-700 mb-3">Purchase Intent? *</p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {["Self Use", "Investment"].map(i => (
-                        <button 
-                            key={i} 
-                            onClick={() => handleInputChange("intent", i)} 
-                            className={`p-4 text-xs border-2 rounded-xl font-bold transition-all ${formData.intent === i ? "border-emerald-500 bg-emerald-50 text-emerald-700" : "border-slate-100 text-slate-500 hover:border-slate-200"}`}
-                        >
-                            {i}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex gap-3">
-                    <button onClick={handleBack} className="flex-1 border-2 border-slate-100 py-4 rounded-xl font-bold text-slate-400 flex items-center justify-center gap-2 hover:bg-slate-50">
-                        <ChevronLeft className="w-5 h-5" /> Back
-                    </button>
-                    <button onClick={handleNext} className="flex-[2] bg-emerald-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700">Continue</button>
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && (
-                <div className="space-y-4">
-                  <p className="text-sm font-bold text-slate-700 mb-1">Expected Purchase Timeline? *</p>
-                  <select 
-                    className="w-full p-4 border-2 border-slate-100 rounded-xl font-bold text-sm bg-slate-50 outline-none focus:border-emerald-500" 
-                    onChange={(e) => handleInputChange("timeline", e.target.value)}
-                  >
-                    <option value="">Select Timeline...</option>
-                    <option value="Immediate">Immediate / 1 Month</option>
-                    <option value="1-3 Months">1-3 Months</option>
-                    <option value="Exploring">Just Exploring</option>
-                  </select>
-                  <label className="flex items-start gap-3 p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
-                    <input 
-                        type="checkbox" 
-                        className="mt-1 w-4 h-4 accent-emerald-600" 
-                        checked={formData.consent} 
-                        onChange={(e) => handleInputChange("consent", e.target.checked)} 
-                    />
-                    <span className="text-[10px] text-slate-500 font-medium italic leading-relaxed">
-                        I authorize the developer to share price lists, payment plans, and floor plans via Call/WhatsApp/SMS.
-                    </span>
-                  </label>
-                  <div className="flex gap-3">
-                    <button onClick={handleBack} className="flex-1 border-2 border-slate-100 py-4 rounded-xl font-bold text-slate-400 flex items-center justify-center gap-2 hover:bg-slate-50">
-                        <ChevronLeft className="w-5 h-5" /> Back
-                    </button>
-                    <button 
-                        disabled={loading} 
-                        onClick={handleSubmit} 
-                        className="flex-[2] bg-slate-900 text-white py-4 rounded-xl font-bold shadow-xl disabled:opacity-50 hover:bg-black transition-colors"
-                    >
-                        {loading ? "Registering..." : "Submit Inquiry"}
-                    </button>
+                  <div className="flex gap-4">
+                    <button onClick={() => setStep(1)} className="flex-1 border-2 py-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2" style={{ borderColor: COLORS.cream, color: COLORS.tan }}><ChevronLeft className="w-4 h-4" /> Back</button>
+                    <button disabled={loading} onClick={handleSubmit} className="flex-[2] py-4 rounded-xl font-bold shadow-xl active:scale-95 text-xs text-white" style={{ backgroundColor: COLORS.charcoal }}>{loading ? "Submitting..." : "Submit"}</button>
                   </div>
                 </div>
               )}
             </motion.div>
           ) : (
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-6">
-              <ShieldCheck className="w-16 h-16 text-emerald-600 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-slate-900">Priority Access Secured</h3>
-              <p className="text-slate-500 mt-2 text-sm">Thank you <b>{formData.name}</b>. An executive will contact you on <b>{formData.phone}</b> within 24 hours.</p>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: COLORS.cream }}>
+                <ShieldCheck className="w-10 h-10" style={{ color: COLORS.gold }} />
+              </div>
+              <h3 className="text-xl font-serif font-bold" style={{ color: COLORS.charcoal }}>Submitted Successfully</h3>
+              <p className="mt-3 text-xs font-light" style={{ color: COLORS.charcoal }}>A concierge will contact you shortly.</p>
             </motion.div>
           )}
         </AnimatePresence>

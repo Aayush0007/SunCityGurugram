@@ -1,71 +1,64 @@
-import { Building2, Shield, Clock, Award, Star, Globe, Heart, CheckCircle2 } from 'lucide-react';
+import { Building2, Shield, Award, Globe, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function DeveloperTrust() {
+  const COLORS = {
+    tan: "#B68D40",      // Tan
+    cream: "#F4F1E1",    // Cream
+    charcoal: "#121C17", // Charcoal (Dark Green-Black)
+    gold: "#D6AD60",     // Gold
+    white: "#FFFFFF",
+    bgCream: "#FDFCF7"   // Soft secondary cream
+  };
+
   const developers = [
     {
       name: "Godrej Properties",
       heritage: "Since 1897",
-      focus: "Wellness & Innovation",
       desc: "A 128-year legacy of trust, delivering Japanese-inspired Shibui wellness residences at Godrej SORA.",
-      accent: "text-red-600"
     },
     {
       name: "Suncity Projects",
       heritage: "Since 1996",
-      focus: "Luxury Townships",
       desc: "Pioneering iconic landmarks across Delhi-NCR with a focus on low-density elegance and premium urban planning.",
-      accent: "text-blue-600"
     },
     {
       name: "Emaar India",
       heritage: "Global Presence",
-      focus: "Master Communities",
       desc: "The creators of Serenity Hills, bringing international standards of sustainable living to Sector 86.",
-      accent: "text-emerald-600"
     },
     {
       name: "Conscient",
       heritage: "Value Meets Values",
-      focus: "Architectural Marvels",
       desc: "Partnering with global masters like Benoy, HK to deliver Gurugram's most expansive luxury clubhouses.",
-      accent: "text-amber-600"
     },
     {
       name: "Ashiana Housing",
       heritage: "Kid-Centric Experts",
-      focus: "Family Wellness",
       desc: "India's leader in curated Kid-Centric Residences designed to nurture growth and creativity.",
-      accent: "text-indigo-600"
     }
   ];
 
   const highlights = [
     {
-      icon: <Award className="w-10 h-10 text-amber-600" />,
+      icon: <Award className="w-10 h-10" style={{ color: COLORS.gold }} />,
       title: "Platinum Pre-Certified",
       desc: "Sustainability-focused developments including Godrej SORA and Serenity Hills' IGBC Platinum Pre-Certifications.",
-      color: "from-amber-50 to-yellow-50",
-      border: "border-amber-200",
     },
     {
-      icon: <Globe className="w-10 h-10 text-emerald-600" />,
+      icon: <Globe className="w-10 h-10" style={{ color: COLORS.gold }} />,
       title: "Global Design Partners",
       desc: "Collaborating with world-renowned consultants like Benoy (Hong Kong) and Japanese design philosophies.",
-      color: "from-emerald-50 to-teal-50",
-      border: "border-emerald-200",
     },
     {
-      icon: <Shield className="w-10 h-10 text-blue-600" />,
+      icon: <Shield className="w-10 h-10" style={{ color: COLORS.gold }} />,
       title: "H-RERA Certified Portfolio",
-      desc: "Full transparency with RERA-registered phases (976/708/2025/79), ensuring complete safety for every investor.",
-      color: "from-blue-50 to-indigo-50",
-      border: "border-blue-200",
+      desc: "Full transparency with RERA-registered phases, ensuring complete safety for every elite investor.",
     },
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
+    <section className="py-24 overflow-hidden" style={{ backgroundColor: COLORS.bgCream }}>
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}
@@ -76,17 +69,19 @@ export default function DeveloperTrust() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <span className="text-xs uppercase tracking-[0.6em] text-emerald-600 font-bold mb-4 block">The Pillars of Excellence</span>
-          <h2 className="text-4xl md:text-6xl font-bold font-serif text-gray-900 mb-8 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-            Global Masters. <span className="italic text-emerald-700">Trusted Legacies.</span>
+          <span className="text-xs uppercase tracking-[0.6em] font-bold mb-4 block" style={{ color: COLORS.tan }}>
+            The Pillars of Excellence
+          </span>
+          <h2 className="text-4xl md:text-6xl font-bold font-serif mb-8" style={{ color: COLORS.charcoal }}>
+            Global Masters. <span className="italic font-light" style={{ color: COLORS.gold }}>Trusted Legacies.</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed font-light" style={{ color: COLORS.charcoal, opacity: 0.8 }}>
             Living Luxura curates Gurugram's most prestigious residential enclaves, developed by industry leaders 
             recognized for their sustainable innovation and 100+ years of collective trust.
           </p>
         </motion.div>
 
-        {/* Brand Showcase Grid - Updated to 5 columns for desktop */}
+        {/* Brand Showcase Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-24">
           {developers.map((dev, index) => (
             <motion.div 
@@ -94,13 +89,14 @@ export default function DeveloperTrust() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="group p-6 bg-white rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-500"
+              className="group p-8 rounded-[2rem] shadow-sm border transition-all duration-500 bg-white hover:shadow-xl"
+              style={{ borderColor: `${COLORS.tan}20` }}
             >
-              <Building2 className={`w-6 h-6 mb-4 ${dev.accent}`} />
-              <h4 className="font-serif font-bold text-slate-900 text-lg mb-1 leading-tight">{dev.name}</h4>
-              <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest mb-3">{dev.heritage}</p>
-              <div className="h-px w-8 bg-slate-100 mb-3 group-hover:w-full transition-all duration-500" />
-              <p className="text-[11px] text-slate-500 leading-relaxed">{dev.desc}</p>
+              <Building2 className="w-6 h-6 mb-4" style={{ color: COLORS.tan }} />
+              <h4 className="font-serif font-bold text-lg mb-1 leading-tight" style={{ color: COLORS.charcoal }}>{dev.name}</h4>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: COLORS.tan }}>{dev.heritage}</p>
+              <div className="h-px w-8 mb-4 transition-all duration-500 group-hover:w-full" style={{ backgroundColor: COLORS.gold }} />
+              <p className="text-xs leading-relaxed font-light" style={{ color: COLORS.charcoal, opacity: 0.7 }}>{dev.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -115,16 +111,17 @@ export default function DeveloperTrust() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               whileHover={{ y: -10 }}
-              className={`relative p-10 bg-gradient-to-br ${item.color} rounded-[2.5rem] border ${item.border} transition-all duration-300`}
+              className="relative p-10 rounded-[2.5rem] border transition-all duration-300 bg-white"
+              style={{ borderColor: `${COLORS.tan}33` }}
             >
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm mb-8" style={{ backgroundColor: COLORS.cream }}>
                 {item.icon}
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900">{item.title}</h3>
-              <p className="text-slate-600 leading-relaxed text-sm mb-6">{item.desc}</p>
+              <h3 className="text-2xl font-serif font-bold mb-4" style={{ color: COLORS.charcoal }}>{item.title}</h3>
+              <p className="leading-relaxed text-sm mb-8 font-light" style={{ color: COLORS.charcoal, opacity: 0.8 }}>{item.desc}</p>
               
-              <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" /> Verified Portfolio Detail
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest" style={{ color: COLORS.tan }}>
+                <CheckCircle2 className="w-3 h-3" /> Verified Portfolio Detail
               </div>
             </motion.div>
           ))}
@@ -138,13 +135,13 @@ export default function DeveloperTrust() {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-center mt-24"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-full mb-8">
-            <Shield className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-bold uppercase tracking-widest">HRERA Registered Portfolio</span>
+          <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full mb-8 shadow-lg" style={{ backgroundColor: COLORS.charcoal }}>
+            <Shield className="w-4 h-4" style={{ color: COLORS.gold }} />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white">HRERA Registered Portfolio</span>
           </div>
-          <p className="text-2xl md:text-4xl italic text-slate-800 font-serif leading-snug">
+          <p className="text-2xl md:text-4xl italic font-serif leading-snug" style={{ color: COLORS.charcoal }}>
             "A century of trust, <br className="hidden md:block" />
-            <span className="text-emerald-700 font-bold not-italic">securing legacies for generations.</span>"
+            <span className="font-bold not-italic" style={{ color: COLORS.gold }}>securing legacies for generations.</span>"
           </p>
         </motion.div>
       </div>
