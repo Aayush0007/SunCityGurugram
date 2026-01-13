@@ -186,7 +186,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                 <div>
                   <p className="text-xs font-bold text-slate-500 mb-2 ml-1">Where are you currently living? *</p>
                   <div className="grid grid-cols-2 gap-2">
-                    {["Gurugram", "Haryana", "Delhi", "Other"].map((loc) => (
+                    {["Gurugram", "Delhi", "Other"].map((loc) => (
                       <button
                         key={loc}
                         type="button"
