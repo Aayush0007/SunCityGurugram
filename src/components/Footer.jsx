@@ -190,9 +190,10 @@ export default function Footer() {
                 className="text-[10px] leading-relaxed italic uppercase tracking-wider font-medium"
                 style={{ color: COLORS.tan }}
               >
+                RC/HARERA/GGM/3846/3441/2025/723
                 RERA IDs: RC/REP/HARERA/GGM/976/708/2025/79 |
                 RC/REP/HARERA/GGM/993/725/2025/96 |
-                RC/REP/HARERA/GGM/917/649/2025/20 | 117 of 2025.
+                RC/REP/HARERA/GGM/917/649/2025/20.
               </p>
               <p
                 className="text-[10px] leading-relaxed font-light"

@@ -169,115 +169,12 @@ export default function App({openPopup}) {
                 </div>
                 
                 {/* Registration CTA Box */}
-                <div className="lg:col-span-2">
-                  <div className="p-10 rounded-[3rem] border border-[#D6AD60]/30 relative group transition-all duration-500 hover:border-[#D6AD60]/60 bg-gradient-to-br from-white/[0.07] to-transparent backdrop-blur-xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#D6AD60]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[3rem]" />
-                    
-                    <div className="relative z-10 text-center">
-                      <div className="w-16 h-16 bg-[#D6AD60] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D6AD60]/20">
-                        <Lock className="text-[#0D202B]" size={28} />
-                      </div>
-                      <p className="text-[10px] uppercase font-bold tracking-[0.2em] mb-2 text-[#F4F1E1]/60">Registration Amount</p>
-                      <p className="text-5xl font-serif font-bold mb-2 text-[#F4F1E1]">₹11.00 L</p>
-                      <p className="text-[10px] mb-10 uppercase tracking-widest font-bold text-[#D6AD60]">Immediate Priority Allotment</p>
-                      
-                      <button 
-                        onClick={openPopup} 
-                        className="group w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all relative overflow-hidden active:scale-[0.98]"
-                        style={{ backgroundColor: COLORS.gold, color: COLORS.charcoal }}
-                      >
-                        <span className="relative z-10 flex items-center gap-2">
-                          <Download size={18} /> Detailed Cost Sheet
-                        </span>
-                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </motion.div>
 
             {/* --- Secondary Details Section --- */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              
-              {/* Payment Plan */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:col-span-2 p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm"
-              >
-                 <div className="flex items-center justify-between mb-10">
-                    <h4 className="text-2xl font-serif font-bold flex items-center gap-3" style={{ color: COLORS.charcoal }}>
-                      <ShieldCheck className="text-[#D6AD60]" /> Master Payment Plan
-                    </h4>
-                    <span className="text-[10px] font-bold py-1 px-3 bg-slate-100 rounded-full text-slate-500 uppercase tracking-widest">Construction Linked</span>
-                 </div>
-
-                 <div className="grid md:grid-cols-2 gap-6">
-                    {masterPaymentPlan.map((m, idx) => (
-                      <div key={idx} className="group p-6 rounded-2xl border border-slate-50 hover:border-[#D6AD60]/20 transition-all bg-[#FDFCF7]">
-                         <div className="flex justify-between items-start mb-1">
-                           <p className="text-[9px] font-bold uppercase tracking-widest text-[#D6AD60]">{m.event}</p>
-                           <span className="text-[10px] text-slate-300 font-mono">0{idx + 1}</span>
-                         </div>
-                         <p className="text-2xl font-bold mb-1" style={{ color: COLORS.charcoal }}>{m.value}</p>
-                         <p className="text-[10px] text-slate-400 italic">{m.sub}</p>
-                      </div>
-                    ))}
-                    <div className="md:col-span-2 p-8 rounded-2xl text-white flex flex-col md:flex-row md:items-center justify-between gap-4" style={{ backgroundColor: COLORS.charcoal }}>
-                       <div>
-                          <p className="text-[10px] opacity-60 font-bold uppercase tracking-[0.2em] mb-1">Possession Phase</p>
-                          <p className="text-sm font-light leading-relaxed">External Glazing (12.5%) • OC Application (15%) • Possession (5%)</p>
-                       </div>
-                       <ChevronRight className="hidden md:block text-[#D6AD60]/40" />
-                    </div>
-                 </div>
-              </motion.div>
-
-              {/* Side Badges / Benefits */}
-              <div className="flex flex-col gap-6">
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="p-8 rounded-[2.5rem] border flex flex-col justify-between h-full group hover:shadow-xl transition-all duration-500" 
-                  style={{ backgroundColor: COLORS.cream, borderColor: `${COLORS.gold}33` }}
-                >
-                  <div className="bg-white/50 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 text-[#D6AD60] group-hover:scale-110 transition-transform">
-                    <Info size={24} />
-                  </div>
-                  <div>
-                     <p className="text-xs font-bold mb-3 uppercase tracking-widest" style={{ color: COLORS.charcoal }}>Launch Benefits</p>
-                     <p className="text-sm leading-relaxed font-light text-slate-600">
-                       Exclusive limited-time inventory benefits up to <span className="font-bold text-[#D6AD60]">₹16 Lakhs*</span> applicable on priority registrations.
-                     </p>
-                  </div>
-                </motion.div>
-
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="p-8 rounded-[2.5rem] text-white flex flex-col justify-between h-full relative overflow-hidden shadow-2xl" 
-                  style={{ backgroundColor: COLORS.charcoal }}
-                >
-                  <div className="absolute top-0 right-0 p-4">
-                    <ShieldCheck className="text-[#D6AD60]/20" size={60} />
-                  </div>
-                  <div className="bg-white/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 text-[#D6AD60]">
-                    <ShieldCheck size={24} />
-                  </div>
-                  <div className="relative z-10">
-                     <p className="text-xs font-bold mb-3 uppercase tracking-widest text-[#F4F1E1]">Portfolio Compliant</p>
-                     <p className="text-sm leading-relaxed font-light text-[#F4F1E1]/60">
-                       Fully HRERA registered projects ensuring 100% transparency and escrow-backed security for the elite buyer.
-                     </p>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+            
 
             {/* Disclaimer */}
             <p className="mt-12 text-[10px] text-center text-slate-400 uppercase tracking-widest leading-loose max-w-3xl mx-auto">
