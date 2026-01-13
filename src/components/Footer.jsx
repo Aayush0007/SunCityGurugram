@@ -111,7 +111,7 @@ export default function Footer() {
                     className="text-xl font-bold transition-colors group-hover:text-[#D6AD60]"
                     style={{ color: COLORS.white }}
                   >
-                    +91 93115 94047
+                    +91 92115 22011
                   </p>
                 </div>
               </a>
