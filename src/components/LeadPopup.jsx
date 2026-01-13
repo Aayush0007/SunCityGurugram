@@ -73,7 +73,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
     if (!validPhone) return setError("Please enter a valid 10-digit mobile number.");
     
     if (!formData.location) return setError("Please select your location.");
-    if (!formData.consent) return setError("Please authorize to proceed.");
+    // if (!formData.consent) return setError("Please authorize to proceed.");
 
     setLoading(true);
 
