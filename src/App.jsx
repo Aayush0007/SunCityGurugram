@@ -132,9 +132,9 @@ function App() {
               <DeveloperTrust />
             </section>
 
-            <section id="final-cta">
+            {/* <section id="final-cta">
               <FinalCTA openPopup={openPopup} />
-            </section>
+            </section> */}
 
             <section id="contact" className="py-24 bg-white">
               <ContactForm />
