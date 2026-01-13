@@ -203,7 +203,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   </div>
                 </div>
 
-                <label className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer">
+                {/* <label className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer">
                   <input
                     type="checkbox"
                     className="mt-1 accent-emerald-600"
@@ -213,7 +213,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   <span className="text-[10px] text-slate-500 font-medium leading-tight">
                     I authorize Suncity Monarch and partners to contact me via Call, WhatsApp, or SMS.
                   </span>
-                </label>
+                </label> */}
 
                 <button
                   type="submit"
@@ -222,7 +222,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                 >
                   {loading ? "Verifying..." : (
                     <>
-                      Secure Priority Access <Send className="w-4 h-4" />
+                      Submit <Send className="w-4 h-4" />
                     </>
                   )}
                 </button>
