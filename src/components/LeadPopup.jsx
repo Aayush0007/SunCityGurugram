@@ -23,7 +23,6 @@ export default function LeadPopup({ trigger = false, onClose }) {
   const [error, setError] = useState("");
   const [showCloseButton, setShowCloseButton] = useState(false);
 
-  // Design Constants based on your provided palette
   const COLORS = {
     tan: "#B68D40",
     cream: "#F4F1E1",
@@ -37,6 +36,20 @@ export default function LeadPopup({ trigger = false, onClose }) {
     phone: "",
     location: "",
   });
+
+  // Handle URL Hash monitoring for Google conversion tracking
+  useEffect(() => {
+    if (submitted) {
+      // Set the URL to #submit so Google Ads can track the "Thank You" page
+      window.location.hash = "submit";
+    }
+  }, [submitted]);
+
+  const handleReturnToSite = () => {
+    // Clear the hash and return to home URL
+    window.location.hash = "";
+    onClose();
+  };
 
   const utms = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
@@ -110,7 +123,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
       trackEvent({ action: "lead_submit", category: "conversion", label: "whatsapp_popup" });
 
       const clientNumber = "919211522011";
-      const message = `Hi, I am interested in the Ultra-Luxury Portfolio on livingluxura.com.%0A%0A*Lead Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0A*Project Interest:*%0A- Godrej SORA (Sector 53, Golf Course Rd)%0A- Emaar Serenity Hills (Sector 86)%0A- Conscient Elaira / Ashiana Aaroham (Sector 80)%0A%0APlease share brochures and payment plans.`;
+     const message = `Hi, I am interested in the Ultra-Luxury Properties on livingluxura.com.%0A%0A*Contact Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0A*Curated Interests:*%0A- DLF (Golf Course Road Ecosystem)%0A- Emaar (Serenity Hills %26 Global Collection)%0A- Godrej (SORA %26 Shibui Wellness)%0A- M3M (Futuristic Smart Homes)%0A- Ashiana (Kid-Centric Residences)%0A%0APlease share the master brochures, payment plans, and priority access details.`;
       
       const whatsappUrl = `https://wa.me/${clientNumber}?text=${message}`;
       
@@ -136,10 +149,9 @@ export default function LeadPopup({ trigger = false, onClose }) {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-white rounded-[2.5rem] shadow-2xl max-w-md w-full overflow-hidden relative"
       >
-        {/* Header - Charcoal with Gold Accents */}
         <div className="p-8 text-center text-white relative" style={{ backgroundColor: COLORS.charcoal }}>
           {showCloseButton && (
-            <button onClick={onClose} className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all">
+            <button onClick={handleReturnToSite} className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all">
               <X className="w-5 h-5" style={{ color: COLORS.tan }} />
             </button>
           )}
@@ -156,6 +168,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                 animate={{ opacity: 1 }} 
                 className="space-y-5"
               >
+                {/* Form fields same as before... */}
                 {error && (
                   <div className="p-3 bg-red-50 text-red-600 text-xs rounded-xl border border-red-100 text-center font-bold">
                     {error}
@@ -225,7 +238,12 @@ export default function LeadPopup({ trigger = false, onClose }) {
                 </p>
               </motion.form>
             ) : (
-              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-10">
+              <motion.div 
+                key="success-screen"
+                initial={{ scale: 0.9, opacity: 0 }} 
+                animate={{ scale: 1, opacity: 1 }} 
+                className="text-center py-10"
+              >
                 <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: COLORS.cream }}>
                   <ShieldCheck className="w-10 h-10" style={{ color: COLORS.gold }} />
                 </div>
@@ -234,7 +252,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   Thank you <b>{formData.name}</b>. Redirection to WhatsApp for exclusive launch benefits...
                 </p>
                 <button 
-                  onClick={onClose} 
+                  onClick={handleReturnToSite} 
                   className="mt-10 px-12 py-4 rounded-full font-bold text-xs uppercase tracking-widest transition-all"
                   style={{ backgroundColor: COLORS.charcoal, color: COLORS.white }}
                 >
