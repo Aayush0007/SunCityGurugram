@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Trees, Home, Trophy, Sparkles, Download, ShieldCheck } from "lucide-react";
 import { trackEvent } from "../utils/analytics";
-import heroBg from "../Assets/Hero.png";
+import heroBg from "../Assets/Hero.jpg";
 
 export default function Hero({ openPopup }) {
   const [quickPhone, setQuickPhone] = useState("");

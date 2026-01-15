@@ -59,36 +59,59 @@ export default function Navbar({ openPopup }) {
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => scrollTo("hero")}
           >
-            <div
-              className={`p-2 rounded-xl transition-all duration-300 ${
-                isScrolled
-                  ? "bg-[#0D20617]"
-                  : "bg-white/10 backdrop-blur-md border border-white/20"
-              }`}
-            >
-              <div className="relative w-12 h-12 md:w-14 md:h-14 transition-transform duration-500 group-hover:scale-105">
-              <img 
-                src="/Logo.png" 
-                alt="Living Luxura Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
-            </div>
             <div className="flex flex-col">
-              <span
-                className={`font-serif font-bold text-xl tracking-tight leading-none transition-colors duration-300 ${
-                  isScrolled ? "text-[#0D20617]" : "text-white"
-                }`}
-              >
-                Living Luxura
-              </span>
-              <span
-                className={`text-[8px] uppercase tracking-[0.2em] font-bold mt-1 transition-colors duration-300 ${
-                  isScrolled ? "text-[#D6AD60]" : "text-[#D6AD60]/80"
-                }`}
-              >
-                Godrej | Emaar | Conscient | Ashiana
-              </span>
+              {/* Brand Name Section */}
+
+              <div className="flex flex-col items-center">
+                {/* The Brand Identity: High-Precision Stacked Logo */}
+                <div
+                  className="flex items-center gap-0 cursor-pointer group"
+                  onClick={() => scrollTo("hero")}
+                >
+                  <span
+                    className="font-serif font-bold transition-colors duration-300 flex items-center"
+                    style={{ color: isScrolled ? "#121C17" : "#FFFFFF" }}
+                  >
+                    {/* Large anchor 'L' */}
+                    <span
+                      className="text-6xl md:text-7xl leading-none"
+                      style={{ color: "#D6AD60" }}
+                    >
+                      L
+                    </span>
+
+                    {/* Precision-aligned text container */}
+                    <div className="flex flex-col justify-center leading-[0.75]">
+                      {/* 'IVING' tucked close to the L stem */}
+                      <span className="text-xl md:text-2xl tracking-[0.1em] uppercase ml-[-2px] md:ml-[-4px]">
+                        iving
+                      </span>
+
+                      {/* 'UXURA' with a small intentional space after the L stem */}
+                      <span
+                        className="text-xl md:text-2xl tracking-[0.05em] uppercase ml-1 md:ml-1.5"
+                        style={{ color: "#D6AD60" }}
+                      >
+                        uxura
+                      </span>
+                    </div>
+                  </span>
+                </div>
+
+                {/* Developer Names centered below */}
+                <span
+                  className="text-[7px] md:text-[9px] uppercase tracking-[0.3em] font-bold mt-2 transition-colors duration-300 whitespace-nowrap"
+                  style={{ color: "#D6AD60" }}
+                >
+                  EMAAR | DLF | GODREJ | M3M | ASHIANA
+                </span>
+              </div>
+
+              {/* Animated Underline Effect */}
+              <div
+                className="h-px w-0 group-hover:w-full transition-all duration-500 mt-0.5"
+                style={{ backgroundColor: "#D6AD60" }}
+              />
             </div>
           </motion.div>
 
