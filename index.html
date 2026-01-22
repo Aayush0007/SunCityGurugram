@@ -65,6 +65,21 @@
   </script>
   <!-- End Google Tag Manager -->
 
+
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof (url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17115326069/ifL1CLDsv80aEPXMnOE_',
+        'event_callback': callback
+      });
+      return false;
+    }
+  </script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 </head>
 
