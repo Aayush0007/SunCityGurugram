@@ -58,29 +58,39 @@ export default function ContactForm() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.location) return setError("Please select your current residency.");
+  if (!formData.location) return setError("Please select your current residency.");
 
-    setLoading(true);
-    try {
-      const { error: dbError } = await supabase.from("leads").insert([{
-        name: formData.name.trim(),
-        phone: validateIndianMobile(formData.phone),
-        location: formData.location,
-        intent: "Inquiry", // Default internal value
-        timeline: "Immediate", // Default internal value
-        utm_source: "short_contact_form"
-      }]);
+  setLoading(true);
+  try {
+    const validPhone = validateIndianMobile(formData.phone);
+    
+    const { error: dbError } = await supabase.from("leads").insert([{
+      name: formData.name.trim(),
+      phone: validPhone,
+      location: formData.location,
+      intent: "Inquiry",
+      timeline: "Immediate",
+      utm_source: "short_contact_form"
+    }]);
 
-      if (dbError) throw dbError;
-      setSubmitted(true);
-      trackEvent({ action: "form_submit", category: "contact", label: "short_form" });
-    } catch (err) {
-      setError("System busy. Please try again later.");
-    } finally {
-      setLoading(false);
+    if (dbError) throw dbError;
+
+    // ✅ TRIGGER GOOGLE ADS CONVERSION
+    if (typeof window.gtag_report_conversion === 'function') {
+      window.gtag_report_conversion();
     }
-  };
 
+    setSubmitted(true);
+    // ✅ UPDATE URL FOR GOOGLE MONITORING
+    window.location.hash = "submit";
+    
+    trackEvent({ action: "form_submit", category: "contact", label: "short_form" });
+  } catch (err) {
+    setError("System busy. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div id="contact" className="max-w-md mx-auto bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
       <div className="pt-10 pb-8 px-8 text-center" style={{ backgroundColor: COLORS.charcoal }}>

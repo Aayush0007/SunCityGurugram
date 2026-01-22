@@ -33,6 +33,7 @@ export default function Navbar({ openPopup }) {
     { name: "Amenities", id: "amenities" },
     { name: "Pricing", id: "pricing" },
     { name: "Location", id: "location" },
+    { name: "Contact Us", id: "contact" },
   ];
 
   // Design Constants

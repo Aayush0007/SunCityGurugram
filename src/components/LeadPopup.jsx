@@ -86,11 +86,13 @@ export default function LeadPopup({ trigger = false, onClose }) {
     e.preventDefault();
 
     if (!formData.name.trim()) return setError("Please enter your name.");
-    if (/\d/.test(formData.name)) return setError("Name cannot contain numbers.");
-    
+    if (/\d/.test(formData.name))
+      return setError("Name cannot contain numbers.");
+
     const validPhone = validateIndianMobile(formData.phone);
-    if (!validPhone) return setError("Please enter a valid 10-digit mobile number.");
-    
+    if (!validPhone)
+      return setError("Please enter a valid 10-digit mobile number.");
+
     if (!formData.location) return setError("Please select your location.");
 
     setLoading(true);
@@ -114,24 +116,37 @@ export default function LeadPopup({ trigger = false, onClose }) {
         utm_source: utms.source,
         utm_medium: utms.medium,
         utm_campaign: utms.campaign,
-        status: "New"
+        status: "New",
       };
 
-      const { error: insertError } = await supabase.from("leads").insert([payload]);
+      const { error: insertError } = await supabase
+        .from("leads")
+        .insert([payload]);
       if (insertError) throw insertError;
 
-      trackEvent({ action: "lead_submit", category: "conversion", label: "whatsapp_popup" });
+      // ✅ TRIGGER GOOGLE ADS CONVERSION
+      if (typeof window.gtag_report_conversion === "function") {
+        window.gtag_report_conversion();
+      }
 
-      const clientNumber = "919211522011";
-     const message = `Hi, I am interested in the Ultra-Luxury Properties on livingluxura.com.%0A%0A*Contact Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0A*Curated Interests:*%0A- DLF (Golf Course Road Ecosystem)%0A- Emaar (Serenity Hills %26 Global Collection)%0A- Godrej (SORA %26 Shibui Wellness)%0A- M3M (Futuristic Smart Homes)%0A- Ashiana (Kid-Centric Residences)%0A%0APlease share the master brochures, payment plans, and priority access details.`;
-      
-      const whatsappUrl = `https://wa.me/${clientNumber}?text=${message}`;
-      
+      trackEvent({
+        action: "lead_submit",
+        category: "conversion",
+        label: "whatsapp_popup",
+      });
+
+      /*const clientNumber = "919211522011";
+      const message = `Hi, I am interested in the Ultra-Luxury Properties on livingluxura.com.%0A%0A*Contact Details:*%0A- Name: ${formData.name}%0A- Mobile: ${validPhone}%0A- Current Location: ${formData.location}%0A%0A*Curated Interests:*%0A- DLF (Golf Course Road Ecosystem)%0A- Emaar (Serenity Hills %26 Global Collection)%0A- Godrej (SORA %26 Shibui Wellness)%0A- M3M (Futuristic Smart Homes)%0A- Ashiana (Kid-Centric Residences)%0A%0APlease share the master brochures, payment plans, and priority access details.`;
+
+      const whatsappUrl = `https://wa.me/${clientNumber}?text=${message}`;*/
+
       setSubmitted(true);
-      setTimeout(() => {
-        window.open(whatsappUrl, "_blank");
-      }, 1000);
+      // ✅ UPDATE URL FOR GOOGLE MONITORING
+      window.location.hash = "submit";
 
+      /*setTimeout(() => {
+        window.open(whatsappUrl, "_blank");
+      }, 1000);*/
     } catch (err) {
       setError("System busy. Please try again later.");
     } finally {
@@ -149,23 +164,36 @@ export default function LeadPopup({ trigger = false, onClose }) {
         animate={{ opacity: 1, scale: 1 }}
         className="bg-white rounded-[2.5rem] shadow-2xl max-w-md w-full overflow-hidden relative"
       >
-        <div className="p-8 text-center text-white relative" style={{ backgroundColor: COLORS.charcoal }}>
+        <div
+          className="p-8 text-center text-white relative"
+          style={{ backgroundColor: COLORS.charcoal }}
+        >
           {showCloseButton && (
-            <button onClick={handleReturnToSite} className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all">
+            <button
+              onClick={handleReturnToSite}
+              className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all"
+            >
               <X className="w-5 h-5" style={{ color: COLORS.tan }} />
             </button>
           )}
-          <h2 className="text-2xl font-serif font-bold italic">Living Luxura</h2>
-          <p className="text-[10px] uppercase tracking-[0.4em] mt-2" style={{ color: COLORS.gold }}>Verified Developer Collection</p>
+          <h2 className="text-2xl font-serif font-bold italic">
+            Living Luxura
+          </h2>
+          <p
+            className="text-[10px] uppercase tracking-[0.4em] mt-2"
+            style={{ color: COLORS.gold }}
+          >
+            Verified Developer Collection
+          </p>
         </div>
 
         <div className="p-8">
           <AnimatePresence mode="wait">
             {!submitted ? (
-              <motion.form 
+              <motion.form
                 onSubmit={handleSubmit}
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 className="space-y-5"
               >
                 {/* Form fields same as before... */}
@@ -180,7 +208,10 @@ export default function LeadPopup({ trigger = false, onClose }) {
                     type="text"
                     placeholder="Full Name *"
                     className="w-full p-4 border-2 rounded-2xl outline-none transition-all text-sm"
-                    style={{ borderColor: COLORS.cream, color: COLORS.charcoal }}
+                    style={{
+                      borderColor: COLORS.cream,
+                      color: COLORS.charcoal,
+                    }}
                     value={formData.name}
                     onChange={(e) => handleNameChange(e.target.value)}
                   />
@@ -191,14 +222,22 @@ export default function LeadPopup({ trigger = false, onClose }) {
                     type="tel"
                     placeholder="Mobile Number *"
                     className="w-full p-4 border-2 rounded-2xl outline-none transition-all text-sm"
-                    style={{ borderColor: COLORS.cream, color: COLORS.charcoal }}
+                    style={{
+                      borderColor: COLORS.cream,
+                      color: COLORS.charcoal,
+                    }}
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
                   />
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest mb-3 ml-1" style={{ color: COLORS.tan }}>Current City? *</p>
+                  <p
+                    className="text-[10px] font-bold uppercase tracking-widest mb-3 ml-1"
+                    style={{ color: COLORS.tan }}
+                  >
+                    Current City? *
+                  </p>
                   <div className="grid grid-cols-3 gap-2">
                     {["Gurugram", "Delhi", "Other"].map((loc) => (
                       <button
@@ -208,10 +247,16 @@ export default function LeadPopup({ trigger = false, onClose }) {
                         className={`py-3 text-[10px] border-2 rounded-xl font-bold transition-all ${
                           formData.location === loc ? "shadow-md" : ""
                         }`}
-                        style={{ 
-                          borderColor: formData.location === loc ? COLORS.gold : COLORS.cream,
-                          backgroundColor: formData.location === loc ? COLORS.cream : "transparent",
-                          color: COLORS.charcoal
+                        style={{
+                          borderColor:
+                            formData.location === loc
+                              ? COLORS.gold
+                              : COLORS.cream,
+                          backgroundColor:
+                            formData.location === loc
+                              ? COLORS.cream
+                              : "transparent",
+                          color: COLORS.charcoal,
                         }}
                       >
                         {loc}
@@ -224,37 +269,64 @@ export default function LeadPopup({ trigger = false, onClose }) {
                   type="submit"
                   disabled={loading}
                   className="w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-xl active:scale-95 text-xs uppercase tracking-widest"
-                  style={{ backgroundColor: COLORS.gold, color: COLORS.charcoal }}
+                  style={{
+                    backgroundColor: COLORS.gold,
+                    color: COLORS.charcoal,
+                  }}
                 >
-                  {loading ? "Establishing Access..." : (
+                  {loading ? (
+                    "Establishing Access..."
+                  ) : (
                     <>
                       Submit <Send className="w-4 h-4" />
                     </>
                   )}
                 </button>
-                
-                <p className="text-[9px] text-center italic opacity-60" style={{ color: COLORS.charcoal }}>
-                  * Instant priority access to payment plans & brochures
+
+                <p
+                  className="text-[9px] text-center italic opacity-60"
+                  style={{ color: COLORS.charcoal }}
+                >
+                  * Instant access to payment plans & brochures
                 </p>
               </motion.form>
             ) : (
-              <motion.div 
+              <motion.div
                 key="success-screen"
-                initial={{ scale: 0.9, opacity: 0 }} 
-                animate={{ scale: 1, opacity: 1 }} 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
                 className="text-center py-10"
               >
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: COLORS.cream }}>
-                  <ShieldCheck className="w-10 h-10" style={{ color: COLORS.gold }} />
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+                  style={{ backgroundColor: COLORS.cream }}
+                >
+                  <ShieldCheck
+                    className="w-10 h-10"
+                    style={{ color: COLORS.gold }}
+                  />
                 </div>
-                <h3 className="text-2xl font-serif font-bold italic" style={{ color: COLORS.charcoal }}>Submitted Successfully</h3>
-                <p className="mt-4 text-sm font-light leading-relaxed" style={{ color: COLORS.charcoal }}>
-                  Thank you <b>{formData.name}</b>. Redirection to WhatsApp for exclusive launch benefits...
+                <h3
+                  className="text-2xl font-serif font-bold italic"
+                  style={{ color: COLORS.charcoal }}
+                >
+                  Submitted Successfully
+                </h3>
+                <p
+                  className="mt-4 text-sm font-light leading-relaxed"
+                  style={{ color: COLORS.charcoal }}
+                >
+                  Thank you <b>{formData.name}</b>. Your inquiry has been
+                  received. Our luxury consultants will contact you shortly with
+                  exclusive details.
                 </p>
-                <button 
-                  onClick={handleReturnToSite} 
+                <button
+                  onClick={handleReturnToSite}
                   className="mt-10 px-12 py-4 rounded-full font-bold text-xs uppercase tracking-widest transition-all"
-                  style={{ backgroundColor: COLORS.charcoal, color: COLORS.white }}
+                  style={{
+                    backgroundColor: COLORS.charcoal,
+                    color: COLORS.white,
+                  }}
                 >
                   Return to Site
                 </button>
