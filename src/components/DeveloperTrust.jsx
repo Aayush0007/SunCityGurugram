@@ -12,32 +12,22 @@ export default function DeveloperTrust() {
   };
 
   const developers = [
-    {
-      name: "Emaar India",
-      heritage: "Global Legacy",
-      desc: "The creators of the Burj Khalifa, bringing world-class engineering and the 'Emaar Life' philosophy to iconic Gurugram developments like Serenity Hills.",
-    },
-    {
-      name: "DLF Limited",
-      heritage: "Since 1946",
-      desc: "The architects of modern Gurugram with a nearly 80-year legacy, defining super-luxury living through the legendary Golf Course Road ecosystem.",
-    },
-    {
-      name: "Godrej Properties",
-      heritage: "Since 1897",
-      desc: "A 129-year legacy of trust, blending historic sustainability with Japanese-inspired 'Shibui' wellness residences at Godrej SORA.",
-    },
-    {
-      name: "M3M India",
-      heritage: "Magnificence in Trinity",
-      desc: "Redefining the luxury skyline with speed and scale, M3M is known for futuristic designs and ultra-luxury smart-home enclaves across the Dwarka Expressway.",
-    },
-    {
-      name: "Ashiana Housing",
-      heritage: "Kid-Centric Experts",
-      desc: "Voted India's No. 1 Care Provider, specializing in curated Kid-Centric Residences designed to nurture growth, creativity, and active childhoods.",
-    },
-  ];
+  {
+    name: "Suncity Projects",
+    heritage: "Pioneers of Luxury,",
+    desc: "Renowned for delivering architectural marvels and premium townships, Suncity Projects has redefined the skyline of Gurugram with a commitment to excellence and high-end living.",
+  },
+  {
+    name: "Conscient Infrastructure",
+    heritage: "Art of Living,",
+    desc: "A developer that blends progressive design with soulful aesthetics, creating sophisticated urban sanctuaries like 'Hines Elevate' that cater to the connoisseurs of fine living.",
+  },
+  {
+    name: "Emaar India,",
+    heritage: "Global Legacy,",
+    desc: "The creators of the Burj Khalifa, bringing world-class engineering and the 'Emaar Life' philosophy to iconic Gurugram developments like Serenity Hills.",
+  },
+];
 
   const highlights = [
     {

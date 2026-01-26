@@ -104,7 +104,7 @@ export default function Navbar({ openPopup }) {
                   className="text-[7px] md:text-[9px] uppercase tracking-[0.3em] font-bold mt-2 transition-colors duration-300 whitespace-nowrap"
                   style={{ color: "#D6AD60" }}
                 >
-                  EMAAR | DLF | GODREJ | M3M | ASHIANA
+                  EMAAR | SUNCITY | Conscient  
                 </span>
               </div>
 

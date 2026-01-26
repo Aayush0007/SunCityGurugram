@@ -81,7 +81,7 @@ export default function ProjectOverview() {
               </span>
             </h3>
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -95,11 +95,11 @@ export default function ProjectOverview() {
               collection now features masterpieces by Emaar, Conscient, and
               Ashiana.
             </p>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Project Statistics Bar */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -122,7 +122,7 @@ export default function ProjectOverview() {
               </p>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Immersive Visual Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
@@ -164,7 +164,7 @@ export default function ProjectOverview() {
             </motion.div>
 
             {/* Dark Information Card */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -193,12 +193,12 @@ export default function ProjectOverview() {
                 Occupying the most coveted plots across Sector 53, 80, and 86,
                 offering the ultimate addresses in Gurugram.
               </p>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
 
         {/* Highlight Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {highlights.map((item, index) => (
             <motion.div
               key={index}
@@ -226,7 +226,7 @@ export default function ProjectOverview() {
               </p>
             </motion.div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

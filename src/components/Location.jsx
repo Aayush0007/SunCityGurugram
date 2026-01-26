@@ -70,7 +70,7 @@ export default function Location() {
           >
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Portfolio Presence</p>
             <div className="flex items-center gap-2 font-bold text-[10px] uppercase tracking-wider" style={{ color: COLORS.gold }}>
-               Godrej <span className="opacity-30">|</span> Emaar <span className="opacity-30">|</span> Conscient <span className="opacity-30">|</span> Ashiana
+               Emaar <span className="opacity-30">|</span> Conscient <span className="opacity-30">|</span> Suncity
             </div>
           </motion.div>
         </div>

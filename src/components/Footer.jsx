@@ -45,9 +45,9 @@ export default function Footer() {
             >
               Curating Gurugram's finest residential masterpieces. From the
               wellness-inspired{" "}
-              <strong style={{ color: COLORS.gold }}>
+              {/* <strong style={{ color: COLORS.gold }}>
                 Godrej SORA (Sector 53)
-              </strong>{" "}
+              </strong>{" "} */}
               to the sustainable greens of{" "}
               <strong style={{ color: COLORS.gold }}>
                 Serenity Hills (Emaar)
@@ -55,7 +55,7 @@ export default function Footer() {
               , the global design of{" "}
               <strong style={{ color: COLORS.gold }}>Elaira (Conscient)</strong>
               , and{" "}
-              <strong style={{ color: COLORS.gold }}>Aaroham (Ashiana)</strong>.
+              <strong style={{ color: COLORS.gold }}>Suncity</strong>.
             </p>
             <div className="flex flex-col gap-4">
               <div
@@ -65,13 +65,13 @@ export default function Footer() {
                 <ShieldCheck className="w-4 h-4" />
                 H-RERA Registered Portfolio
               </div>
-              <div
+              {/* <div
                 className="flex items-center gap-3 font-bold text-[10px] uppercase tracking-[0.2em]"
                 style={{ color: COLORS.cream, opacity: 0.6 }}
               >
                 <Globe className="w-4 h-4" />
                 Sectors 53, 78, 80 & 86, Gurugram
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export default function Footer() {
                   </p>
                 </div>
               </a>
-              <div className="flex items-start gap-5">
+              {/* <div className="flex items-start gap-5">
                 <div
                   className="w-12 h-12 rounded-full border flex items-center justify-center"
                   style={{
@@ -140,7 +140,7 @@ export default function Footer() {
                     Sector 78, Naurangpur, Gurugram
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

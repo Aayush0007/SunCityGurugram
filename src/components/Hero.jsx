@@ -1,49 +1,98 @@
-//<section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Trees, Home, Trophy, Sparkles, Download, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Trees, Home, Trophy, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { trackEvent } from "../utils/analytics";
-import heroBg from "../Assets/Hero.jpg";
+
+// Importing all hero assets
+import heroBg from "../Assets/Hero.webp";
+import heroBg1 from "../Assets/Hero1.png";
+import heroBg2 from "../Assets/Hero2.webp";
+import heroBg3 from "../Assets/Hero3.jpg";
+import heroBg4 from "../Assets/Hero4.webp";
 
 export default function Hero({ openPopup }) {
   const [quickPhone, setQuickPhone] = useState("");
+  const [currentImage, setCurrentImage] = useState(0);
 
-  const handleQuickLead = (e) => {
-    e.preventDefault();
-    if (quickPhone.length >= 10) {
-      trackEvent({ action: "quick_lead_submit", category: "engagement", label: "hero_form" });
-      openPopup();
-    }
-  };
+  const images = [heroBg2, heroBg1, heroBg, heroBg3, heroBg4];
+
+  // Manual Navigation Functions
+  const nextSlide = () => setCurrentImage((prev) => (prev + 1) % images.length);
+  const prevSlide = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+
+  // Auto-play logic (stops if user interacts, or keeps going)
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [currentImage]);
 
   const highlights = [
     {
-      icon: <Home className="w-8 h-8 text-[#D6AD60]" />, // Gold
+      icon: <Home className="w-8 h-8 text-[#D6AD60]" />,
       title: "Royal Living",
       desc: "Ultra-luxury residences in Gurugram's elite corridors.",
     },
     {
-      icon: <Trophy className="w-8 h-8 text-[#B68D40]" />, // Tan
+      icon: <Trophy className="w-8 h-8 text-[#B68D40]" />,
       title: "Elite Clubs",
-      desc: "75,000+ Sq. Ft. world-class designer club ecosystems.",
+      desc: "World-class designer club ecosystems.",
     },
     {
-      icon: <Trees className="w-8 h-8 text-[#D6AD60]" />, // Gold
+      icon: <Trees className="w-8 h-8 text-[#D6AD60]" />,
       title: "Nature's Estate",
-      desc: "25+ acres of landscaped greens and waterfront trails.",
+      desc: "Landscaped greens and waterfront trails.",
     },
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
+      {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroBg} 
-          alt="Royal Penthouse View" 
-          className="w-full h-full object-cover opacity-60"
-        />
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImage}
+            src={images[currentImage]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0 w-full h-full object-cover"
+            alt={`Luxury View ${currentImage + 1}`}
+          />
+        </AnimatePresence>
+        
+        {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D20617] via-[#0D20617]/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0D20617]" />
+      </div>
+
+      {/* Manual Controls (Arrows) */}
+      <div className="absolute inset-0 z-20 flex items-center justify-between px-4 md:px-8 pointer-events-none">
+        <button 
+          onClick={prevSlide}
+          className="p-2 rounded-full bg-[#F4F1E1]/5 border border-[#F4F1E1]/10 text-[#F4F1E1]/50 hover:bg-[#D6AD60]/20 hover:text-[#D6AD60] transition-all pointer-events-auto group"
+        >
+          <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+        </button>
+        <button 
+          onClick={nextSlide}
+          className="p-2 rounded-full bg-[#F4F1E1]/5 border border-[#F4F1E1]/10 text-[#F4F1E1]/50 hover:bg-[#D6AD60]/20 hover:text-[#D6AD60] transition-all pointer-events-auto group"
+        >
+          <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+        </button>
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentImage(idx)}
+            className={`h-1.5 transition-all duration-500 rounded-full ${
+              currentImage === idx ? "w-8 bg-[#D6AD60]" : "w-2 bg-[#F4F1E1]/30"
+            }`}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 w-full">
@@ -54,18 +103,16 @@ export default function Hero({ openPopup }) {
               <Sparkles className="w-4 h-4" /> The Royal Collection
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#F4F1E1] leading-[1.1] mb-6 tracking-tight"> {/* Cream Text */}
-              The Gold Standard in <span className="text-[#D6AD60] italic">Gurugram</span> {/* Gold Accent */}
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-[#F4F1E1] leading-[1.1] mb-6 tracking-tight">
+              The Gold Standard in <span className="text-[#D6AD60] italic">Gurugram</span>
               <span className="block text-2xl md:text-4xl mt-4 font-sans font-light tracking-tight text-[#F4F1E1]/80">
                 Curated Luxury for the Elite Few
               </span>
             </h1>
 
-            <p className="text-lg text-[#F4F1E1]/70 mb-10 max-w-xl leading-relaxed font-light"> {/* Cream Muted */}
+            {/* <p className="text-lg text-[#F4F1E1]/70 mb-10 max-w-xl leading-relaxed font-light">
               Explore ultra-luxury 3 BHK residences starting from ₹2.98 Cr* in the city's most prestigious sectors.
-            </p>
-
-           
+            </p> */}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {highlights.map((item, idx) => (
@@ -78,8 +125,6 @@ export default function Hero({ openPopup }) {
               ))}
             </div>
           </motion.div>
-
-          
         </div>
       </div>
     </section>
