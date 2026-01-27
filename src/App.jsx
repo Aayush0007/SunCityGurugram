@@ -1,6 +1,6 @@
 import { useState, useEffect, Suspense, lazy } from "react";
 // Added missing motion import to fix the ReferenceError
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import { pageView, trackEvent } from "./utils/analytics";
 
 // Critical components loaded immediately for First Contentful Paint (FCP)
@@ -11,7 +11,9 @@ import Footer from "./components/Footer";
 // Lazy-loaded sections to reduce initial bundle size and improve speed
 const ProjectOverview = lazy(() => import("./components/ProjectOverview"));
 const WhyChoose = lazy(() => import("./components/WhyChoose"));
-const UnitConfigurations = lazy(() => import("./components/UnitConfigurations"));
+const UnitConfigurations = lazy(
+  () => import("./components/UnitConfigurations"),
+);
 const Amenities = lazy(() => import("./components/Amenities"));
 const Pricing = lazy(() => import("./components/Pricing"));
 const Location = lazy(() => import("./components/Location"));
@@ -19,20 +21,23 @@ const Gallery = lazy(() => import("./components/Gallery"));
 const DeveloperTrust = lazy(() => import("./components/DeveloperTrust"));
 const FinalCTA = lazy(() => import("./components/FinalCTA"));
 const LeadPopup = lazy(() => import("./components/LeadPopup"));
-const TermsAndConditions = lazy(() => import("./components/TermsAndConditions"));
+const TermsAndConditions = lazy(
+  () => import("./components/TermsAndConditions"),
+);
 const ContactForm = lazy(() => import("./components/ContactForm"));
+const Properties = lazy(() => import("./components/Properties"));
 
 // High-UX Royal Loader Component using the brand palette
 const RoyalLoader = () => (
   <div className="w-full py-32 flex flex-col items-center justify-center bg-[#FDFCF7]">
-    <motion.div 
+    <motion.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
       className="w-10 h-10 border-2 rounded-full mb-6"
       style={{ borderTopColor: "#D6AD60", borderColor: "#F4F1E1" }}
     />
-    <p 
-      className="text-[10px] uppercase tracking-[0.5em] font-bold animate-pulse" 
+    <p
+      className="text-[10px] uppercase tracking-[0.5em] font-bold animate-pulse"
       style={{ color: "#B68D40" }}
     >
       Curating Excellence
@@ -48,7 +53,7 @@ function App() {
   const COLORS = {
     charcoal: "#121C17",
     gold: "#D6AD60",
-    bgCream: "#FDFCF7"
+    bgCream: "#FDFCF7",
   };
 
   useEffect(() => {
@@ -59,7 +64,11 @@ function App() {
     const checkHash = () => {
       if (window.location.hash === "#enquire-now") {
         setShowPopup(true);
-        trackEvent({ action: "popup_open", category: "lead", label: "url_hash" });
+        trackEvent({
+          action: "popup_open",
+          category: "lead",
+          label: "url_hash",
+        });
       }
       if (window.location.hash === "#terms") {
         setShowTerms(true);
@@ -73,7 +82,11 @@ function App() {
     const timer = setTimeout(() => {
       setShowPopup((prev) => {
         if (!prev && !showTerms) {
-          trackEvent({ action: "popup_open", category: "lead", label: "auto_timer" });
+          trackEvent({
+            action: "popup_open",
+            category: "lead",
+            label: "auto_timer",
+          });
           return true;
         }
         return prev;
@@ -89,6 +102,11 @@ function App() {
   const openPopup = () => {
     setShowPopup(true);
     trackEvent({ action: "popup_open", category: "lead", label: "manual" });
+
+    // ✅ IMPORTANT: Clear the hash so the listener can detect it again if clicked later
+    if (window.location.hash === "#enquire-now") {
+      window.history.replaceState(null, null, " ");
+    }
   };
 
   const closePopup = () => {
@@ -102,35 +120,52 @@ function App() {
   };
 
   return (
-    <div className="antialiased selection:bg-[#D6AD60] selection:text-[#121C17]" style={{ backgroundColor: COLORS.bgCream }}>
+    <div
+      className="antialiased selection:bg-[#D6AD60] selection:text-[#121C17]"
+      style={{ backgroundColor: COLORS.bgCream }}
+    >
       <Navbar openPopup={openPopup} />
 
       <main>
         {/* Hero loads immediately */}
         <Hero openPopup={openPopup} />
-        
+
         {/* Suspense with RoyalLoader for all lazy components */}
         <Suspense fallback={<RoyalLoader />}>
           <article>
-            <section id="overview" className="py-4"><ProjectOverview /></section>
-            <section id="why-choose" className="py-4"><WhyChoose /></section>
-            
-            <section id="units" className="py-12 bg-white/50">
-              <UnitConfigurations openPopup={openPopup} />
-            </section>
-            
-            <section id="amenities" className="py-4"><Amenities /></section>
-            
-            <section id="pricing" className="py-12 bg-white/50">
-              <Pricing openPopup={openPopup} />
-            </section>
-            
-            <section id="location" className="py-4"><Location /></section>
-            <section id="gallery" className="py-4"><Gallery /></section>
+            {/* Dynamic Multi-Property Section */}
+            <Properties openPopup={openPopup} />
 
-            <section id="trust" className="py-12 bg-white/50">
-              <DeveloperTrust />
+            <section id="overview" className="py-4">
+              <ProjectOverview />
             </section>
+
+            <section id="why-choose" className="py-4">
+              <WhyChoose />
+            </section>
+
+            {/* <section id="units" className="py-12 bg-white/50">
+              <UnitConfigurations openPopup={openPopup} />
+            </section> */}
+
+            <section id="amenities" className="py-4">
+              <Amenities />
+            </section>
+
+            {/* <section id="pricing" className="py-12 bg-white/50">
+              <Pricing openPopup={openPopup} />
+            </section> */}
+
+            <section id="location" className="py-4">
+              <Location />
+            </section>
+            <section id="gallery" className="py-4">
+              <Gallery />
+            </section>
+
+            {/* <section id="trust" className="py-12 bg-white/50">
+              <DeveloperTrust />
+            </section> */}
 
             {/* <section id="final-cta">
               <FinalCTA openPopup={openPopup} />
@@ -148,7 +183,9 @@ function App() {
       {/* Overlays with immediate zero-flicker suspense */}
       <Suspense fallback={null}>
         {showPopup && <LeadPopup trigger={showPopup} onClose={closePopup} />}
-        {showTerms && <TermsAndConditions isOpen={showTerms} onClose={closeTerms} />}
+        {showTerms && (
+          <TermsAndConditions isOpen={showTerms} onClose={closeTerms} />
+        )}
       </Suspense>
     </div>
   );

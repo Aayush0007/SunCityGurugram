@@ -6,7 +6,7 @@ import { trackEvent } from "../utils/analytics";
 // Importing all hero assets
 import heroBg from "../Assets/Hero.webp";
 import heroBg1 from "../Assets/Hero1.png";
-import heroBg2 from "../Assets/Hero2.webp";
+import heroBg2 from "../Assets/Hero2.png";
 import heroBg3 from "../Assets/Hero3.jpg";
 import heroBg4 from "../Assets/Hero4.webp";
 

@@ -62,7 +62,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
   useEffect(() => {
     if (trigger && !submitted) {
-      const timer = setTimeout(() => setShowCloseButton(true), 10000);
+      const timer = setTimeout(() => setShowCloseButton(true), 1000);
       return () => clearTimeout(timer);
     }
   }, [trigger, submitted]);
@@ -157,7 +157,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
   if (!trigger) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-[#121C17]/90">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 backdrop-blur-md bg-[#121C17]/90">
       <motion.div
         layout
         initial={{ opacity: 0, scale: 0.95 }}
