@@ -54,8 +54,7 @@ export default function Footer() {
               </strong>
               , the global design of{" "}
               <strong style={{ color: COLORS.gold }}>Elaira (Conscient)</strong>
-              , and{" "}
-              <strong style={{ color: COLORS.gold }}>Suncity</strong>.
+              , and <strong style={{ color: COLORS.gold }}>Suncity</strong>.
             </p>
             <div className="flex flex-col gap-4">
               <div
@@ -115,7 +114,7 @@ export default function Footer() {
                   </p>
                 </div>
               </a>
-              {/* <div className="flex items-start gap-5">
+              <div className="flex items-start gap-5">
                 <div
                   className="w-12 h-12 rounded-full border flex items-center justify-center"
                   style={{
@@ -136,11 +135,10 @@ export default function Footer() {
                     className="font-medium text-sm leading-relaxed"
                     style={{ color: COLORS.cream }}
                   >
-                    Sector 53, Golf Course Road /<br />
-                    Sector 78, Naurangpur, Gurugram
+                    Gurugram Haryana
                   </p>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
 
@@ -156,9 +154,10 @@ export default function Footer() {
 
             <ul className="space-y-5 text-sm font-medium">
               {[
-                { name: "Project Portfolio", id: "overview" },
-                { name: "Residences", id: "units" },
-                { name: "Payment Plans", id: "pricing" },
+                { name: "Properties", id: "properties" }, 
+                { name: "Gallery", id: "gallery" },
+                { name: "Amenities", id: "amenities" },
+                { name: "Contact Us", id: "contact" },
                 { name: "Developer Legacy", id: "trust" },
                 { name: "Legal & Terms", id: "terms" },
               ].map((link) => (
@@ -190,8 +189,8 @@ export default function Footer() {
                 className="text-[10px] leading-relaxed italic uppercase tracking-wider font-medium"
                 style={{ color: COLORS.tan }}
               >
-                RC/HARERA/GGM/3846/3441/2025/723 |
-                RERA IDs: RC/REP/HARERA/GGM/976/708/2025/79 |
+                RC/HARERA/GGM/3846/3441/2025/723 | RERA IDs:
+                RC/REP/HARERA/GGM/976/708/2025/79 |
                 RC/REP/HARERA/GGM/993/725/2025/96 |
                 RC/REP/HARERA/GGM/917/649/2025/20.
               </p>

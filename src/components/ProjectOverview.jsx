@@ -41,7 +41,7 @@ export default function ProjectOverview() {
             className="lg:max-w-sm"
           >
             <p className="text-slate-500 leading-relaxed border-l-2 pl-6 font-light border-[#D6AD60]">
-              From the global engineering of <strong>Emaar</strong>, we provide a unified gateway to the city's finest ultra-luxury developments.
+              From the global engineering of <strong>architecture </strong>, we provide a unified gateway to the city's finest ultra-luxury developments.
             </p>
           </motion.div>
         </div>

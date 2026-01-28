@@ -89,7 +89,7 @@ export default function Gallery() {
             A Glimpse of <span className="italic font-light" style={{ color: COLORS.gold }}>Perfection</span>
           </h2>
           <p className="max-w-xl mx-auto text-base font-light text-slate-500">
-            From the sprawling central greens of Emaar to the record-breaking sports infrastructure of Suncity Monarch.
+            From the sprawling central greens of Emaar to the record-breaking sports infrastructure of Suncity Monarch and Conscient Elaira.
           </p>
         </div>
 

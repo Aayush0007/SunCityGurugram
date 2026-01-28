@@ -41,75 +41,7 @@ export default function WhyChoose() {
 
   return (
     <section id="why-choose" className="py-24 bg-[#FDFCF7] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-20">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[10px] uppercase tracking-[0.5em] font-bold mb-4"
-            style={{ color: COLORS.gold }}
-          >
-            The Decision Factor
-          </motion.span>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-serif font-bold mb-6"
-            style={{ color: COLORS.charcoal }}
-          >
-            A Selection of <span className="italic" style={{ color: COLORS.gold }}>Unmatched</span> Value
-          </motion.h2>
-          <div className="w-20 h-1 rounded-full" style={{ backgroundColor: COLORS.gold }} />
-        </div>
-
-        {/* Dynamic Grid: Now focuses on 4 main pillars for better balance */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative rounded-[2.5rem] overflow-hidden transition-all duration-500 bg-white border border-[#D6AD60]/10 hover:shadow-2xl"
-            >
-              {/* Image Header */}
-              <div className="h-48 overflow-hidden relative">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121C17]/80 to-transparent" />
-                <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-4 py-1 rounded-full text-[9px] font-bold text-white uppercase tracking-widest border border-white/20">
-                  {item.category}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8 pt-12 relative">
-                {/* Floating Icon */}
-                <div className="absolute -top-10 left-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-[#D6AD60]/10 group-hover:bg-[#121C17] transition-colors duration-300">
-                   <div className="group-hover:scale-110 transition-transform">
-                    {item.icon}
-                   </div>
-                </div>
-
-                <h3 className="text-xl font-serif font-bold mb-3 leading-tight text-[#121C17] group-hover:text-[#D6AD60] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-slate-500 text-xs leading-relaxed font-light">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
+      
         {/* Closing Tagline */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -122,7 +54,7 @@ export default function WhyChoose() {
             <span className="font-bold not-italic" style={{ color: COLORS.gold }}>Global Excellence & Sustainable Wellness.</span>
           </p>
         </motion.div>
-      </div>
+      
     </section>
   );
 }

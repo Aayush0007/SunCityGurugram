@@ -29,9 +29,9 @@ export default function Navbar({ openPopup }) {
   // since those are now dynamic within the 'Properties' section.
   const menuItems = [
     { name: "Properties", id: "properties" }, // New consolidated properties link
-    { name: "Overview", id: "overview" },
     { name: "Amenities", id: "amenities" },
-    { name: "Location", id: "location" },
+    { name: "Gallery", id: "gallery" },
+    // { name: "Location", id: "location" },
     { name: "Contact Us", id: "contact" },
   ];
 

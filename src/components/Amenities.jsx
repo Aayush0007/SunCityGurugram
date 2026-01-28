@@ -40,7 +40,7 @@ const amenities = [
   {
     icon: <Waves className="w-8 h-8" />,
     title: "Infinity Sky Pool",
-    project: "Portfolio Wide",
+    project: "Emaar Serenity Hills",
     desc: "Olympic-sized infinity pools and temperature-controlled aquatic decks with panoramic views of the Aravallis.",
     img: "https://sreindiarealty.com/uploads/blog/experion-the-trillion-redefining-luxury-living-in-sector-48-gurgaon.jpg",
   },
@@ -139,7 +139,7 @@ export default function Amenities() {
         </div>
 
         {/* Global Standard Trust Bar */}
-        <motion.div 
+        {/* <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -173,7 +173,7 @@ export default function Amenities() {
                <span className="text-[9px] text-slate-400 font-medium">Infinity Edge Pools</span>
              </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

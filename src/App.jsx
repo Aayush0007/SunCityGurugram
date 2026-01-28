@@ -136,13 +136,13 @@ function App() {
             {/* Dynamic Multi-Property Section */}
             <Properties openPopup={openPopup} />
 
-            <section id="overview" className="py-4">
+            {/* <section id="overview" className="py-4">
               <ProjectOverview />
-            </section>
+            </section> */}
 
-            <section id="why-choose" className="py-4">
+            {/* <section id="why-choose" className="py-4">
               <WhyChoose />
-            </section>
+            </section> */}
 
             {/* <section id="units" className="py-12 bg-white/50">
               <UnitConfigurations openPopup={openPopup} />
@@ -156,9 +156,9 @@ function App() {
               <Pricing openPopup={openPopup} />
             </section> */}
 
-            <section id="location" className="py-4">
+            {/* <section id="location" className="py-4">
               <Location />
-            </section>
+            </section> */}
             <section id="gallery" className="py-4">
               <Gallery />
             </section>

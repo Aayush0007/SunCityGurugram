@@ -18,6 +18,7 @@ const ConscientElaira4 = "/Assets/ConscientElaira4.jpg";
 const ConscientElairaMap = "/Assets/ConscientElairaMap.png";
 const ConscientElairaPlan = "/Assets/ConscientElairaPlan.png";
 const ConscientElairaPlan2 = "/Assets/ConscientElairaPlan2.png";
+const ConscientElairaMap2 = "/Assets/ConcientMap.png";
 
 export const properties = [
   {
@@ -172,7 +173,7 @@ export const properties = [
     price: "Starting ₹3.00 Cr",
     image: ConscientElaira,
     gallery: {
-      images: [ConscientElaira, ConscientElaira2, ConscientElaira3, ConscientElaira4, ConscientElairaMap, ConscientElairaPlan],
+      images: [ConscientElaira, ConscientElaira2, ConscientElaira3, ConscientElaira4, ConscientElairaMap, ConscientElairaPlan, ConscientElairaPlan2],
       videos: [], // Add your Elaira-specific video path here when ready
     },
     overview:

@@ -97,6 +97,8 @@ export default function Properties({ openPopup }) {
             ))}
           </AnimatePresence>
         </div>
+
+        
       </div>
     </section>
   );
