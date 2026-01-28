@@ -1,22 +1,23 @@
-import heroImg from "../Assets/suncity-monarch-hero.png";
-import vid1 from "../Assets/VD1.mp4";
-import vid2 from "../Assets/VD2.mp4";
-import extraImg from "../Assets/Img.png";
-import plan from "../Assets/Plan.png";
-import SuncityMasterplan from "../Assets/SuncityMasterPlan.png";
-import suncity1 from "../Assets/suncity1.png";
-import suncity2 from "../Assets/suncity2.png";
-import suncity4 from "../Assets/suncity4.png";
-import emaar from "../Assets/emaar-serenity-map.jpg";
-import emaar2 from "../Assets/serenity-lake-1.jpg";
-import emaar3 from "../Assets/serenity-main.jpg";
-import ConscientElaira from "../Assets/ConscientElaira.jpg";
-import ConscientElaira2 from "../Assets/ConscientElaira2.png";
-import ConscientElaira3 from "../Assets/ConscientElaira3.png";
-import ConscientElaira4 from "../Assets/ConscientElaira4.jpg";
-import ConscientElairaMap from "../Assets/ConscientElairaMap.png";
-import ConscientElairaPlan from "../Assets/ConscientElairaPlan.png";
-import ConscientElairaPlan2 from "../Assets/ConscientElairaPlan2.png";
+// Static Asset Paths (Files must be located in public/Assets/ folder)
+const heroImg = "/Assets/suncity-monarch-hero.png";
+const vid1 = "/Assets/VD1.mp4";
+const vid2 = "/Assets/VD2.mp4";
+const extraImg = "/Assets/Img.png";
+const plan = "/Assets/Plan.png";
+const SuncityMasterplan = "/Assets/SuncityMasterPlan.png";
+const suncity1 = "/Assets/suncity1.png";
+const suncity2 = "/Assets/suncity2.png";
+const suncity4 = "/Assets/suncity4.png";
+const emaar = "/Assets/emaar-serenity-map.jpg";
+const emaar2 = "/Assets/serenity-lake-1.jpg";
+const emaar3 = "/Assets/serenity-main.jpg";
+const ConscientElaira = "/Assets/ConscientElaira.jpg";
+const ConscientElaira2 = "/Assets/ConscientElaira2.png";
+const ConscientElaira3 = "/Assets/ConscientElaira3.png";
+const ConscientElaira4 = "/Assets/ConscientElaira4.jpg";
+const ConscientElairaMap = "/Assets/ConscientElairaMap.png";
+const ConscientElairaPlan = "/Assets/ConscientElairaPlan.png";
+const ConscientElairaPlan2 = "/Assets/ConscientElairaPlan2.png";
 
 export const properties = [
   {

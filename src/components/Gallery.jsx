@@ -5,7 +5,7 @@ import X from 'lucide-react/dist/esm/icons/x';
 import Maximize from 'lucide-react/dist/esm/icons/maximize';
 
 // Local Asset Import
-import vd1 from '../Assets/VD1.mp4';
+const vd1 = '../Assets/VD1.mp4';
 // import imgMain from '../Assets/Img.png';
 
 const galleryItems = [
