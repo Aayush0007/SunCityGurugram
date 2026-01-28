@@ -135,7 +135,7 @@ export default function Footer() {
                     className="font-medium text-sm leading-relaxed"
                     style={{ color: COLORS.cream }}
                   >
-                    Gurugram Haryana
+                    Gurugram, Haryana
                   </p>
                 </div>
               </div>

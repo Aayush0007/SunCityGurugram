@@ -62,7 +62,7 @@ export default function LeadPopup({ trigger = false, onClose }) {
 
   useEffect(() => {
     if (trigger && !submitted) {
-      const timer = setTimeout(() => setShowCloseButton(true), 1000);
+      const timer = setTimeout(() => setShowCloseButton(true), 10000);
       return () => clearTimeout(timer);
     }
   }, [trigger, submitted]);

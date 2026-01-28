@@ -91,7 +91,7 @@ function App() {
         }
         return prev;
       });
-    }, 10000);
+    }, 2000);
 
     return () => {
       window.removeEventListener("hashchange", checkHash);
